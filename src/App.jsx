@@ -22,21 +22,21 @@ function App() {
       <Router>
         <Routes>
           <Route path="/sooklion-admin/login" element={<LoginPage />} />
-          <Route element={<Navbar />}>
-            <Route path="/sooklion-admin" element={<HomePage />} />
-            <Route
-              path="/sooklion-admin/apply"
-              element={<ApplicationStatusPage />}
-            />
-            <Route
-              path="/sooklion-admin/pass"
-              element={<PassedApplicantsPage />}
-            />
-            <Route
-              path="/sooklion-admin/document"
-              element={<DocumentItemsPage />}
-            />
-          </Route>
+          {/* <Route element={<Navbar />}> */}
+          <Route path="/sooklion-admin" element={<HomePage />} />
+          <Route
+            path="/sooklion-admin/apply"
+            element={<ApplicationStatusPage />}
+          />
+          <Route
+            path="/sooklion-admin/pass"
+            element={<PassedApplicantsPage />}
+          />
+          <Route
+            path="/sooklion-admin/document"
+            element={<DocumentItemsPage />}
+          />
+          {/* </Route> */}
         </Routes>
       </Router>
     </ThemeProvider>

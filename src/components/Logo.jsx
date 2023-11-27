@@ -6,7 +6,7 @@ const LogoContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 5rem;
-  width: 100%;
+  width: 100vw;
   margin-left: 5rem;
   /* margin-left: 5rem; */
   img {
@@ -22,7 +22,9 @@ const LogoImg = styled.img`
 const Logo = () => {
   return (
     <LogoContainer>
-      <img src={`${process.env.PUBLIC_URL}/Logo.svg`} alt="Logo" />
+      <a href="http://localhost:3000/sooklion-admin/">
+        <img src={`${process.env.PUBLIC_URL}/Logo.svg`} alt="Logo" />
+      </a>
       <LogoImg src={`${process.env.PUBLIC_URL}/AdminLogo.svg`} alt="Logo" />
     </LogoContainer>
   );
