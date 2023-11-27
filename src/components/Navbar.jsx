@@ -5,20 +5,24 @@ import Logo from "./Logo";
 
 const MainLayout = styled.div`
   display: flex;
+  flex-direction: column;
+  height: 100%;
 `;
 
 const NavLayout = styled.div`
-  position: sticky;
+  /* position: sticky; */
   /* top: 0; */
   display: flex;
   flex-direction: column;
   min-width: 261px;
   margin-left: 5rem;
+  height: 100%;
 `;
 
 const NavContainer = styled.div`
   display: flex;
   flex-direction: row;
+  height: 100%;
 `;
 const NavBox = styled.nav`
   display: flex;
@@ -42,61 +46,61 @@ const NavStyleLink = styled(NavLink)`
 
 const VLine = styled.div`
   border-left: 1px solid white;
-  height: 100%;
+  height: 100vh;
   position: absolute;
-  left: 260px;
+  left: 340px;
   /* margin-left: 10px; */
-  /* top: 0; */
+  /* bottom: 0; */
 `;
 
 const Navbar = () => {
   return (
-    <>
-      <Logo />
-      <MainLayout>
-        <NavLayout>
-          <NavContainer className="scontainer">
-            <NavBox className="menu">
-              <NavItemTitle>신규모집 관리</NavItemTitle>
-              <NavList>
-                <NavItem>
-                  <NavStyleLink
-                    to="/sooklion-admin/apply"
-                    className={({ isActive }) =>
-                      isActive ? "active" : undefined
-                    }
-                  >
-                    지원 현황 및 지원 서류
-                  </NavStyleLink>
-                </NavItem>
-                <NavItem>
-                  <NavStyleLink
-                    to="/sooklion-admin/pass"
-                    className={({ isActive }) =>
-                      isActive ? "active" : undefined
-                    }
-                  >
-                    합격자 선정
-                  </NavStyleLink>
-                </NavItem>
-                <NavItem>
-                  <NavStyleLink
-                    to="/sooklion-admin/document"
-                    className={({ isActive }) =>
-                      isActive ? "active" : undefined
-                    }
-                  >
-                    서류 문항 관리
-                  </NavStyleLink>
-                </NavItem>
-              </NavList>
-            </NavBox>
-            <VLine className="v-line"></VLine>
-          </NavContainer>
-        </NavLayout>
-        <Outlet />
-      </MainLayout>
-    </>
+    <MainLayout>
+      {/* <Logo /> */}
+      {/* <MainLayout> */}
+      <NavLayout>
+        <NavContainer className="scontainer">
+          <NavBox className="menu">
+            <NavItemTitle>신규모집 관리</NavItemTitle>
+            <NavList>
+              <NavItem>
+                <NavStyleLink
+                  to="/sooklion-admin/apply"
+                  className={({ isActive }) =>
+                    isActive ? "active" : undefined
+                  }
+                >
+                  지원 현황 및 지원 서류
+                </NavStyleLink>
+              </NavItem>
+              <NavItem>
+                <NavStyleLink
+                  to="/sooklion-admin/pass"
+                  className={({ isActive }) =>
+                    isActive ? "active" : undefined
+                  }
+                >
+                  합격자 선정
+                </NavStyleLink>
+              </NavItem>
+              <NavItem>
+                <NavStyleLink
+                  to="/sooklion-admin/document"
+                  className={({ isActive }) =>
+                    isActive ? "active" : undefined
+                  }
+                >
+                  서류 문항 관리
+                </NavStyleLink>
+              </NavItem>
+            </NavList>
+          </NavBox>
+          <VLine className="v-line"></VLine>
+        </NavContainer>
+      </NavLayout>
+      <Outlet />
+      {/* </MainLayout> */}
+    </MainLayout>
   );
 };
 
