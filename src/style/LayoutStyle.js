@@ -20,6 +20,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   margin-left: 4vw;
+  margin-right: 4vw;
   /* align-items: center; */
   /* justify-items: center; */
   /* justify-content: center; */
