@@ -59,3 +59,12 @@ export const SubTitle = styled.div`
 export const ButtonContainer = styled.div`
   position: relative;
 `;
+
+export const ButtonSet = styled.div`
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 80px;
+`;
