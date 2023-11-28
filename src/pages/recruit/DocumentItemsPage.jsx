@@ -8,7 +8,7 @@ const QuestionContainer = styled.div``;
 
 const QuestionDiv = styled.div`
   padding: 10px 10px;
-  min-width: 1135px;
+  min-width: 1000px;
   border-radius: 15px;
   border: 1px solid #fff;
   background: rgba(217, 217, 217, 0);
