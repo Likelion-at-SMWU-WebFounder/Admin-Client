@@ -5,6 +5,13 @@ export const Layout = styled.div`
   /* height: 100vh; */
 `;
 
+export const RowDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 25px;
+`;
+
 export const HomeContainer = styled.div`
   display: flex;
   /* flex-direction: column; */
@@ -35,7 +42,6 @@ export const Title = styled.div`
   font-weight: 700;
   line-height: normal;
   letter-spacing: -1.768px;
-  margin-bottom: 25px;
 `;
 
 export const About = styled.div`
