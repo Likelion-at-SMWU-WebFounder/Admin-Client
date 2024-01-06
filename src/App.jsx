@@ -14,6 +14,7 @@ import Navbar from "./components/Navbar";
 import { ThemeProvider } from "styled-components";
 import theme from "./style/theme";
 import GlobalStyle from "./style/GlobalStyle";
+import DocumentItemsEditPage from "./pages/recruit/DocumentItemsEditPage";
 
 function App() {
   return (
@@ -35,6 +36,10 @@ function App() {
           <Route
             path="/sooklion-admin/document"
             element={<DocumentItemsPage />}
+          />
+          <Route
+            path="/sooklion-admin/editdocument"
+            element={<DocumentItemsEditPage />}
           />
           {/* </Route> */}
         </Routes>

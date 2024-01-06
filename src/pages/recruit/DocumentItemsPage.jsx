@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import * as S from "../../style/LayoutStyle";
 import Navbar from "../../components/Navbar";
@@ -25,12 +26,29 @@ const Div = styled.div`
   height: 40px;
 `;
 
-const SaveButton = styled.button`
+const EditButton = styled.button`
   border: none;
   margin-right: 20px;
   border-radius: 5px;
   background: #8891e0;
   width: 102px;
+  height: 56px;
+  flex-shrink: 0;
+  color: #000;
+  text-align: center;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: -1.414px;
+`;
+
+const ResetButton = styled.button`
+  border: none;
+  margin-right: 20px;
+  border-radius: 5px;
+  background: #b988e0;
+  width: 145px;
   height: 56px;
   flex-shrink: 0;
   color: #000;
@@ -61,6 +79,8 @@ const questions = [
 ];
 
 const DocumentItemsPage = () => {
+  const navigate = useNavigate();
+
   return (
     <>
       <Logo />
@@ -69,28 +89,36 @@ const DocumentItemsPage = () => {
         <S.Container>
           <S.Title>서류 문항 관리</S.Title>
           <S.About>지원 서류 문항을 관리합니다.</S.About>
-          <S.Title>공통 문항</S.Title>
+          <S.RowDiv>
+            <S.Title>공통 문항</S.Title>
+          </S.RowDiv>
           {questions.map((data) => (
             <QuestionContainer key={data.id}>
               <QuestionDiv>{data.content}</QuestionDiv>
             </QuestionContainer>
           ))}
           <Div></Div>
-          <S.Title>기획 · 디자인 트랙 문항</S.Title>
+          <S.RowDiv>
+            <S.Title>기획 · 디자인 트랙 문항</S.Title>
+          </S.RowDiv>
           {questions.map((data) => (
             <QuestionContainer key={data.id}>
               <QuestionDiv>{data.content}</QuestionDiv>
             </QuestionContainer>
           ))}
           <Div></Div>
-          <S.Title>프론트엔드 트랙 문항</S.Title>
+          <S.RowDiv>
+            <S.Title>프론트엔드 트랙 문항</S.Title>
+          </S.RowDiv>
           {questions.map((data) => (
             <QuestionContainer key={data.id}>
               <QuestionDiv>{data.content}</QuestionDiv>
             </QuestionContainer>
           ))}
           <Div></Div>
-          <S.Title>백엔드 트랙 문항</S.Title>
+          <S.RowDiv>
+            <S.Title>백엔드 트랙 문항</S.Title>
+          </S.RowDiv>
           {questions.map((data) => (
             <QuestionContainer key={data.id}>
               <QuestionDiv>{data.content}</QuestionDiv>
@@ -102,7 +130,14 @@ const DocumentItemsPage = () => {
           <Div></Div>
           <S.ButtonContainer>
             <S.ButtonSet>
-              <SaveButton>저장</SaveButton>
+              <EditButton
+                onClick={() => {
+                  navigate("/sooklion-admin/editdocument");
+                }}
+              >
+                수정
+              </EditButton>
+              <ResetButton>초기화</ResetButton>
             </S.ButtonSet>
           </S.ButtonContainer>
         </S.Container>
