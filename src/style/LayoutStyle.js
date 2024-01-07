@@ -5,6 +5,13 @@ export const Layout = styled.div`
   padding-bottom: 10vh;
 `;
 
+export const RowDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 25px;
+`;
+
 export const HomeContainer = styled.div`
   display: flex;
   /* flex-direction: column; */
@@ -35,7 +42,6 @@ export const Title = styled.div`
   font-weight: 700;
   line-height: normal;
   letter-spacing: -1.768px;
-  margin-bottom: 25px;
 `;
 
 export const About = styled.div`
@@ -58,4 +64,13 @@ export const SubTitle = styled.div`
 
 export const ButtonContainer = styled.div`
   position: relative;
+`;
+
+export const ButtonSet = styled.div`
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 80px;
 `;

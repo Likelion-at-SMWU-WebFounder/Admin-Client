@@ -1,11 +1,10 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import * as S from "../../style/LayoutStyle";
 import Navbar from "../../components/Navbar";
 import Logo from "../../components/Logo";
 
-<<<<<<< Updated upstream
-=======
 const QuestionContainer = styled.div``;
 
 const QuestionDiv = styled.div`
@@ -84,16 +83,14 @@ const questions = [
   },
 ];
 
->>>>>>> Stashed changes
 const DocumentItemsPage = () => {
+  const navigate = useNavigate();
+
   return (
     <>
       <Logo />
       <S.Layout>
         <Navbar />
-<<<<<<< Updated upstream
-        <S.Container></S.Container>
-=======
         <VLine></VLine>
         <S.Container>
           <S.Title>서류 문항 관리</S.Title>
@@ -150,7 +147,6 @@ const DocumentItemsPage = () => {
             </S.ButtonSet>
           </S.ButtonContainer>
         </S.Container>
->>>>>>> Stashed changes
       </S.Layout>
     </>
   );

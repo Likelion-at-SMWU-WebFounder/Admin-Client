@@ -1,9 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-
-const HomeLayout = styled.div`
-  display: flex;
-`;
+import * as S from "../../style/LayoutStyle";
+import Navbar from "../../components/Navbar";
+import Logo from "../../components/Logo";
 
 const VLine = styled.div`
   border-left: 1px solid white;
@@ -11,9 +10,6 @@ const VLine = styled.div`
 `;
 
 const HomePage = () => {
-<<<<<<< Updated upstream
-  return <HomeLayout>홈</HomeLayout>;
-=======
   return (
     <>
       <Logo />
@@ -30,7 +26,6 @@ const HomePage = () => {
       </S.Layout>
     </>
   );
->>>>>>> Stashed changes
 };
 
 export default HomePage;

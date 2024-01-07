@@ -3,6 +3,24 @@ import styled from "styled-components";
 import * as S from "../../style/LayoutStyle";
 import Navbar from "../../components/Navbar";
 import Logo from "../../components/Logo";
+import Board from "../../components/Board";
+
+const DeleteButton = styled.button`
+  border: none;
+  margin-right: 20px;
+  border-radius: 5px;
+  background: #e08888;
+  width: 102px;
+  height: 56px;
+  flex-shrink: 0;
+  color: #000;
+  text-align: center;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: -1.414px;
+`;
 
 const VLine = styled.div`
   border-left: 1px solid white;
@@ -15,9 +33,6 @@ const PassedApplicantsPage = () => {
       <Logo />
       <S.Layout>
         <Navbar />
-<<<<<<< Updated upstream
-        <S.Container></S.Container>
-=======
         <VLine></VLine>
         <S.Container>
           <S.Title>합격자 선정</S.Title>
@@ -30,7 +45,6 @@ const PassedApplicantsPage = () => {
             </S.ButtonSet>
           </S.ButtonContainer>
         </S.Container>
->>>>>>> Stashed changes
       </S.Layout>
     </>
   );

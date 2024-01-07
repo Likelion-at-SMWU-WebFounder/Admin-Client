@@ -4,20 +4,24 @@ import styled from "styled-components";
 
 const MainLayout = styled.div`
   display: flex;
+  flex-direction: column;
+  height: 100%;
 `;
 
 const NavLayout = styled.div`
-  position: sticky;
+  /* position: sticky; */
   /* top: 0; */
   display: flex;
   flex-direction: column;
   min-width: 261px;
   margin-left: 5rem;
+  height: 100%;
 `;
 
 const NavContainer = styled.div`
   display: flex;
   flex-direction: row;
+  height: 100%;
 `;
 const NavBox = styled.nav`
   display: flex;
@@ -39,65 +43,6 @@ const NavStyleLink = styled(NavLink)`
   }
 `;
 
-<<<<<<< Updated upstream
-const VLine = styled.div`
-  border-left: 1px solid white;
-  height: 100%;
-  position: absolute;
-  left: 260px;
-  /* margin-left: 10px; */
-  /* top: 0; */
-`;
-
-const Navbar = () => {
-  return (
-    <>
-      <Logo />
-      <MainLayout>
-        <NavLayout>
-          <NavContainer className="scontainer">
-            <NavBox className="menu">
-              <NavItemTitle>신규모집 관리</NavItemTitle>
-              <NavList>
-                <NavItem>
-                  <NavStyleLink
-                    to="/sooklion-admin/apply"
-                    className={({ isActive }) =>
-                      isActive ? "active" : undefined
-                    }
-                  >
-                    지원 현황 및 지원 서류
-                  </NavStyleLink>
-                </NavItem>
-                <NavItem>
-                  <NavStyleLink
-                    to="/sooklion-admin/pass"
-                    className={({ isActive }) =>
-                      isActive ? "active" : undefined
-                    }
-                  >
-                    합격자 선정
-                  </NavStyleLink>
-                </NavItem>
-                <NavItem>
-                  <NavStyleLink
-                    to="/sooklion-admin/document"
-                    className={({ isActive }) =>
-                      isActive ? "active" : undefined
-                    }
-                  >
-                    서류 문항 관리
-                  </NavStyleLink>
-                </NavItem>
-              </NavList>
-            </NavBox>
-            <VLine className="v-line"></VLine>
-          </NavContainer>
-        </NavLayout>
-        <Outlet />
-      </MainLayout>
-    </>
-=======
 const Navbar = () => {
   return (
     <MainLayout>
@@ -141,9 +86,7 @@ const Navbar = () => {
         </NavContainer>
       </NavLayout>
       <Outlet />
-      {/* </MainLayout> */}
     </MainLayout>
->>>>>>> Stashed changes
   );
 };
 
