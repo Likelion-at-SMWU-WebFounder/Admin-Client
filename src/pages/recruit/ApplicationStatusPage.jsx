@@ -55,23 +55,6 @@ const ButtonSet = styled.div`
   margin-bottom: 80px;
 `;
 
-const PDFButton = styled.button`
-  border: none;
-  margin-right: 20px;
-  border-radius: 5px;
-  background: #fafafa;
-  width: 163px;
-  height: 56px;
-  flex-shrink: 0;
-  color: #000;
-  text-align: center;
-  font-size: 28px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-  letter-spacing: -1.414px;
-`;
-
 const ResetButton = styled.button`
   border: none;
   margin-right: 20px;
@@ -161,8 +144,7 @@ const ApplicationStatusPage = () => {
           </StateContainer>
           <Board />
           <S.ButtonContainer>
-            <ButtonSet>
-              <PDFButton>PDF 추출</PDFButton>
+            <S.ButtonSet>
               <ResetButton>지원자 초기화</ResetButton>
               <AddButton>합격자 테이블에 추가 + </AddButton>
             </ButtonSet>
