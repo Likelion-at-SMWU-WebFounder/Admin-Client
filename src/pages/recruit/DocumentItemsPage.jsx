@@ -60,6 +60,11 @@ const ResetButton = styled.button`
   letter-spacing: -1.414px;
 `;
 
+const VLine = styled.div`
+  border-left: 1px solid white;
+  min-height: 100vh;
+`;
+
 const questions = [
   {
     id: 1,
@@ -86,6 +91,7 @@ const DocumentItemsPage = () => {
       <Logo />
       <S.Layout>
         <Navbar />
+        <VLine></VLine>
         <S.Container>
           <S.Title>서류 문항 관리</S.Title>
           <S.About>지원 서류 문항을 관리합니다.</S.About>

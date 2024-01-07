@@ -22,12 +22,18 @@ const DeleteButton = styled.button`
   letter-spacing: -1.414px;
 `;
 
+const VLine = styled.div`
+  border-left: 1px solid white;
+  min-height: 100vh;
+`;
+
 const PassedApplicantsPage = () => {
   return (
     <>
       <Logo />
       <S.Layout>
         <Navbar />
+        <VLine></VLine>
         <S.Container>
           <S.Title>합격자 선정</S.Title>
           <S.About>합격서류를 분류하여 별도로 관리합니다.</S.About>

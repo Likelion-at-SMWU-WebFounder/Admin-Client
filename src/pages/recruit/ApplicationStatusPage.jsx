@@ -80,6 +80,11 @@ const AddButton = styled.button`
   letter-spacing: -1.414px;
 `;
 
+const VLine = styled.div`
+  border-left: 1px solid white;
+  min-height: 100vh;
+`;
+
 const ApplicationStatusPage = () => {
   const easeOutExpo = (t) => {
     return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
@@ -108,7 +113,8 @@ const ApplicationStatusPage = () => {
     <>
       <Logo />
       <S.Layout>
-        <Navbar />
+        <Navbar 
+        <VLine></VLine>
         <S.Container>
           <S.Title>지원 현황 및 지원 서류</S.Title>
           <S.About>

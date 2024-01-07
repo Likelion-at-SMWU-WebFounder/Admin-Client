@@ -1,7 +1,6 @@
 import React from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import styled from "styled-components";
-import Logo from "./Logo";
 
 const MainLayout = styled.div`
   display: flex;
@@ -44,20 +43,9 @@ const NavStyleLink = styled(NavLink)`
   }
 `;
 
-const VLine = styled.div`
-  border-left: 1px solid white;
-  height: 100vh;
-  position: absolute;
-  left: 340px;
-  /* margin-left: 10px; */
-  /* bottom: 0; */
-`;
-
 const Navbar = () => {
   return (
     <MainLayout>
-      {/* <Logo /> */}
-      {/* <MainLayout> */}
       <NavLayout>
         <NavContainer className="scontainer">
           <NavBox className="menu">
@@ -95,11 +83,9 @@ const Navbar = () => {
               </NavItem>
             </NavList>
           </NavBox>
-          <VLine className="v-line"></VLine>
         </NavContainer>
       </NavLayout>
       <Outlet />
-      {/* </MainLayout> */}
     </MainLayout>
   );
 };

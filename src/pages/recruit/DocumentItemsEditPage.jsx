@@ -60,6 +60,11 @@ const SaveButton = styled.button`
   letter-spacing: -1.414px;
 `;
 
+const VLine = styled.div`
+  border-left: 1px solid white;
+  min-height: 100vh;
+`;
+
 const DocumentItemsEditPage = () => {
   const [commonItemCount, setCommonItemCount] = useState(3); // 초기 입력 수를 3으로 가정합니다.
   const [designItemCount, setDesignItemCount] = useState(3);
@@ -109,6 +114,7 @@ const DocumentItemsEditPage = () => {
       <Logo />
       <S.Layout>
         <Navbar />
+        <VLine></VLine>
         <S.Container>
           <S.Title>서류 문항 관리</S.Title>
           <S.About>지원 서류 문항을 관리합니다.</S.About>
