@@ -1,7 +1,6 @@
 import React from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import styled from "styled-components";
-import Logo from "./Logo";
 
 const MainLayout = styled.div`
   display: flex;
@@ -40,6 +39,7 @@ const NavStyleLink = styled(NavLink)`
   }
 `;
 
+<<<<<<< Updated upstream
 const VLine = styled.div`
   border-left: 1px solid white;
   height: 100%;
@@ -97,6 +97,53 @@ const Navbar = () => {
         <Outlet />
       </MainLayout>
     </>
+=======
+const Navbar = () => {
+  return (
+    <MainLayout>
+      <NavLayout>
+        <NavContainer className="scontainer">
+          <NavBox className="menu">
+            <NavItemTitle>신규모집 관리</NavItemTitle>
+            <NavList>
+              <NavItem>
+                <NavStyleLink
+                  to="/sooklion-admin/apply"
+                  className={({ isActive }) =>
+                    isActive ? "active" : undefined
+                  }
+                >
+                  지원 현황 및 지원 서류
+                </NavStyleLink>
+              </NavItem>
+              <NavItem>
+                <NavStyleLink
+                  to="/sooklion-admin/pass"
+                  className={({ isActive }) =>
+                    isActive ? "active" : undefined
+                  }
+                >
+                  합격자 선정
+                </NavStyleLink>
+              </NavItem>
+              <NavItem>
+                <NavStyleLink
+                  to="/sooklion-admin/document"
+                  className={({ isActive }) =>
+                    isActive ? "active" : undefined
+                  }
+                >
+                  서류 문항 관리
+                </NavStyleLink>
+              </NavItem>
+            </NavList>
+          </NavBox>
+        </NavContainer>
+      </NavLayout>
+      <Outlet />
+      {/* </MainLayout> */}
+    </MainLayout>
+>>>>>>> Stashed changes
   );
 };
 

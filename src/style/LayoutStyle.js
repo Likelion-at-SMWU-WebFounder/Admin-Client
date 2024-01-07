@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Layout = styled.div`
   display: flex;
-  /* height: 100vh; */
+  padding-bottom: 10vh;
 `;
 
 export const HomeContainer = styled.div`
