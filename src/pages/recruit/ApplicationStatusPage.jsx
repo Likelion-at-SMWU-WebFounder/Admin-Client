@@ -113,7 +113,7 @@ const ApplicationStatusPage = () => {
     <>
       <Logo />
       <S.Layout>
-        <Navbar 
+        <Navbar />
         <VLine></VLine>
         <S.Container>
           <S.Title>지원 현황 및 지원 서류</S.Title>
