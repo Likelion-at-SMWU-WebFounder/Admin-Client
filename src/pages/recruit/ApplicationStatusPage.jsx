@@ -46,22 +46,13 @@ const StateNum = styled.div`
   letter-spacing: -2.273px;
 `;
 
-const PDFButton = styled.button`
-  border: none;
-  margin-right: 20px;
-  border-radius: 5px;
-  background: #fafafa;
-  width: 163px;
-  height: 56px;
-  flex-shrink: 0;
-  color: #000;
-  text-align: center;
-  font-size: 28px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-  letter-spacing: -1.414px;
-`;
+const ButtonSet = styled.div`
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 80px;
 
 const ResetButton = styled.button`
   border: none;
@@ -153,7 +144,6 @@ const ApplicationStatusPage = () => {
           <Board />
           <S.ButtonContainer>
             <S.ButtonSet>
-              <PDFButton>PDF 추출</PDFButton>
               <ResetButton>지원자 초기화</ResetButton>
               <AddButton>합격자 테이블에 추가 + </AddButton>
             </S.ButtonSet>
