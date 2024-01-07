@@ -46,14 +46,6 @@ const StateNum = styled.div`
   letter-spacing: -2.273px;
 `;
 
-const ButtonSet = styled.div`
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  display: flex;
-  flex-direction: row;
-  margin-bottom: 80px;
-
 const ResetButton = styled.button`
   border: none;
   margin-right: 20px;
