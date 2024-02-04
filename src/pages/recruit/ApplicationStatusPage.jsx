@@ -139,13 +139,7 @@ const ApplicationStatusPage = () => {
               <StateNum>{useCountNum(60, 0, 2000)}명</StateNum>
             </StateBox>
           </StateContainer>
-          <Board />
-          <S.ButtonContainer>
-            <S.ButtonSet>
-              <ResetButton>지원자 초기화</ResetButton>
-              <AddButton>합격자 테이블에 추가 + </AddButton>
-            </S.ButtonSet>
-          </S.ButtonContainer>
+          <Board buttonContainerType="type1" />
         </S.Container>
       </S.Layout>
     </>
