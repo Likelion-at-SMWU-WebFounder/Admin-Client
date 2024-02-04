@@ -68,7 +68,7 @@ const Navbar = () => {
                     isActive ? "active" : undefined
                   }
                 >
-                  합격자 선정
+                  서류 합격자 선정
                 </NavStyleLink>
               </NavItem>
               <NavItem>
@@ -79,6 +79,26 @@ const Navbar = () => {
                   }
                 >
                   서류 문항 관리
+                </NavStyleLink>
+              </NavItem>
+              <NavItem>
+                <NavStyleLink
+                  to="/sooklion-admin/interview"
+                  className={({ isActive }) =>
+                    isActive ? "active" : undefined
+                  }
+                >
+                  면접 시간 관리
+                </NavStyleLink>
+              </NavItem>
+              <NavItem>
+                <NavStyleLink
+                  to="/sooklion-admin/pass-final"
+                  className={({ isActive }) =>
+                    isActive ? "active" : undefined
+                  }
+                >
+                  최종 합격자 선정
                 </NavStyleLink>
               </NavItem>
             </NavList>
