@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import * as S from "../style/LayoutStyle";
 import Posts from "./Posts";
+import TimePosts from "./TimePosts";
 import Pagination from "./Pagination";
 import Select, { StylesConfig } from "react-select";
 
@@ -52,7 +53,58 @@ const customStyles = {
   }),
 };
 
-const Board = () => {
+const ResetButton = styled.button`
+  border: none;
+  margin-right: 20px;
+  border-radius: 5px;
+  background: #f4a6a6;
+  width: 197px;
+  height: 56px;
+  flex-shrink: 0;
+  color: #000;
+  text-align: center;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: -1.414px;
+`;
+
+const AddButton = styled.button`
+  border: none;
+  margin-right: 20px;
+  border-radius: 5px;
+  background: #8fe088;
+  width: 351px;
+  height: 56px;
+  flex-shrink: 0;
+  color: #000;
+  text-align: center;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: -1.414px;
+`;
+
+const DeleteButton = styled.button`
+  border: none;
+  margin-right: 20px;
+  border-radius: 5px;
+  background: #e08888;
+  width: 102px;
+  height: 56px;
+  flex-shrink: 0;
+  color: #000;
+  text-align: center;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: -1.414px;
+`;
+
+const Board = ({ buttonContainerType }) => {
   const [page, setPage] = useState(1); //페이지
   const limit = 10; // posts가 보일 최대한의 갯수
   const offset = (page - 1) * limit; // 시작점과 끝점을 구하는 offset
@@ -104,13 +156,42 @@ const Board = () => {
           isSearchable={false}
         ></StyledSelect>
       </Wrapper>
-      <Posts list={postsData(boardList)} />
+      {buttonContainerType === "type3" && (
+        <TimePosts list={postsData(boardList)} />
+      )}
+      {(buttonContainerType === "type1" || buttonContainerType === "type2") && (
+        <Posts list={postsData(boardList)} />
+      )}
+
       <Pagination
         limit={limit}
         page={page}
         totalPosts={boardList.length}
         setPage={setPage}
       />
+      {buttonContainerType === "type1" && (
+        <S.ButtonContainer>
+          <S.ButtonSet>
+            <ResetButton>지원자 초기화</ResetButton>
+            <AddButton>합격자 테이블에 추가 + </AddButton>
+          </S.ButtonSet>
+        </S.ButtonContainer>
+      )}
+      {buttonContainerType === "type2" && (
+        <S.ButtonContainer>
+          <S.ButtonSet>
+            <DeleteButton>삭제</DeleteButton>
+          </S.ButtonSet>
+        </S.ButtonContainer>
+      )}
+      {buttonContainerType === "type3" && (
+        <S.ButtonContainer>
+          <S.ButtonSet>
+            <AddButton>최종합격자 테이블에 추가 + </AddButton>
+            <DeleteButton>삭제</DeleteButton>
+          </S.ButtonSet>
+        </S.ButtonContainer>
+      )}
     </BoardContainer>
   );
 };
