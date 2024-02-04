@@ -10,11 +10,6 @@ const VLine = styled.div`
   min-height: 100vh;
 `;
 
-const VLine = styled.div`
-  border-left: 1px solid white;
-  min-height: 100vh;
-`;
-
 const PassedApplicantsPage = () => {
   return (
     <>
