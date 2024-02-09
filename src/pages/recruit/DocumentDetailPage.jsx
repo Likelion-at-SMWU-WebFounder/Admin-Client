@@ -1,31 +1,29 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import axios from "axios";
+import apiModule from "../../api/apiModule";
 import Form from "../../components/Form";
 import Question from "../../components/Question";
 // import html2canvas from "html2canvas";
 // import jsPDF from "jspdf";
 
 const DocumentDetailPage = () => {
-  const { id } = useParams();
+  const { joinerId } = useParams();
   const [documentData, setDocumentData] = useState(null);
 
   useEffect(() => {
     const fetchDocumentData = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:8080/api/recruit/docs/${id}`
-        );
-        setDocumentData(response.data.result);
-        console.log(response.data.result);
+        const data = await apiModule.fetchDocumentDetail(joinerId);
+        setDocumentData(data);
+        console.log(data);
       } catch (error) {
-        console.error("Error :", error);
+        console.error(error);
       }
     };
 
     fetchDocumentData();
-  }, [id]);
+  }, [joinerId]);
 
   return (
     <Layout>
