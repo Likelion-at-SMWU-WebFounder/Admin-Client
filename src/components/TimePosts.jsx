@@ -109,8 +109,8 @@ const Content = styled.div`
 
 const ImageWrap = styled.div``;
 
-const TimePosts = ({ list }) => {
-  const [checkedItems, setCheckedItems] = useState([]);
+// TODO : 면접 시간
+const TimePosts = ({ list, checkedItems, setCheckedItems }) => {
   const [time, setTime] = useState("-");
   const [showPopup, setShowPopup] = useState(false);
   const [selectedItemId, setSelectedItemId] = useState(null);
@@ -134,7 +134,7 @@ const TimePosts = ({ list }) => {
   const onCheckBoxAll = (e) => {
     if (e.target.checked) {
       const checkedListArr = [];
-      list.forEach((item) => checkedListArr.push(item.id));
+      list.forEach((item) => checkedListArr.push(item.joinerId));
       setCheckedItems(checkedListArr);
     } else {
       setCheckedItems([]);
@@ -148,9 +148,9 @@ const TimePosts = ({ list }) => {
     const isChecked = e.target.checked;
     setCheckedItems((prevCheckedItems) => {
       if (isChecked) {
-        return [...prevCheckedItems, item.id];
+        return [...prevCheckedItems, item.joinerId];
       } else {
-        return prevCheckedItems.filter((no) => no !== item.id);
+        return prevCheckedItems.filter((no) => no !== item.joinerId);
       }
     });
   };
@@ -177,13 +177,13 @@ const TimePosts = ({ list }) => {
                 <StyledInput
                   type="checkbox"
                   onChange={(e) => onChangeCheckBox(e, data)}
-                  checked={checkedItems.includes(data.id)}
+                  checked={checkedItems.includes(data.joinerId)}
                 />
               </Cell>
-              <Cell>{data.id}</Cell>
+              <Cell>{data.joinerId}</Cell>
               <Cell>{data.name}</Cell>
-              <Cell>{data.phone}</Cell>
-              <Cell>{data.num}</Cell>
+              <Cell>{data.phoneNum}</Cell>
+              <Cell>{data.studentID}</Cell>
               <Cell>{data.track}</Cell>
               <Cell>{time}</Cell>
               {showPopup && (
