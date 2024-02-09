@@ -2,7 +2,14 @@ import styled from "styled-components";
 
 export const Layout = styled.div`
   display: flex;
-  /* height: 100vh; */
+  padding-bottom: 10vh;
+`;
+
+export const RowDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 25px;
 `;
 
 export const HomeContainer = styled.div`
@@ -35,7 +42,6 @@ export const Title = styled.div`
   font-weight: 700;
   line-height: normal;
   letter-spacing: -1.768px;
-  margin-bottom: 25px;
 `;
 
 export const About = styled.div`

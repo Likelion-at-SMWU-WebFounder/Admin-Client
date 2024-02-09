@@ -1,7 +1,6 @@
 import React from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import styled from "styled-components";
-import Logo from "./Logo";
 
 const MainLayout = styled.div`
   display: flex;
@@ -44,20 +43,9 @@ const NavStyleLink = styled(NavLink)`
   }
 `;
 
-const VLine = styled.div`
-  border-left: 1px solid white;
-  height: 100vh;
-  position: absolute;
-  left: 340px;
-  /* margin-left: 10px; */
-  /* bottom: 0; */
-`;
-
 const Navbar = () => {
   return (
     <MainLayout>
-      {/* <Logo /> */}
-      {/* <MainLayout> */}
       <NavLayout>
         <NavContainer className="scontainer">
           <NavBox className="menu">
@@ -80,7 +68,7 @@ const Navbar = () => {
                     isActive ? "active" : undefined
                   }
                 >
-                  합격자 선정
+                  서류 합격자 선정
                 </NavStyleLink>
               </NavItem>
               <NavItem>
@@ -93,13 +81,31 @@ const Navbar = () => {
                   서류 문항 관리
                 </NavStyleLink>
               </NavItem>
+              <NavItem>
+                <NavStyleLink
+                  to="/sooklion-admin/interview"
+                  className={({ isActive }) =>
+                    isActive ? "active" : undefined
+                  }
+                >
+                  면접 시간 관리
+                </NavStyleLink>
+              </NavItem>
+              <NavItem>
+                <NavStyleLink
+                  to="/sooklion-admin/pass-final"
+                  className={({ isActive }) =>
+                    isActive ? "active" : undefined
+                  }
+                >
+                  최종 합격자 선정
+                </NavStyleLink>
+              </NavItem>
             </NavList>
           </NavBox>
-          <VLine className="v-line"></VLine>
         </NavContainer>
       </NavLayout>
       <Outlet />
-      {/* </MainLayout> */}
     </MainLayout>
   );
 };
