@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import apiModule from "../../api/apiModule";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import * as S from "../../style/LayoutStyle";
@@ -10,6 +11,8 @@ const QuestionContainer = styled.div``;
 const QuestionDiv = styled.div`
   padding: 10px 10px;
   min-width: 1000px;
+  height: fit-content;
+  min-height: 150px;
   border-radius: 15px;
   border: 1px solid #fff;
   background: rgba(217, 217, 217, 0);
@@ -60,39 +63,41 @@ const ResetButton = styled.button`
   letter-spacing: -1.414px;
 `;
 
-const questions = [
-  {
-    id: 1,
-    content:
-      "공통질문 1번을 작성합니다. 수 튼튼하며, 황금시대를 끓는다. 있으며, 힘차게 긴지라 심장의 못할 사막이다. 없으면 긴지라 가치를 이것이다.",
-  },
-  {
-    id: 2,
-    content:
-      "공통질문 2번을 작성합니다. 수 튼튼하며, 황금시대를 끓는다. 있으며, 힘차게 긴지라 심장의 못할 사막이다. 없으면 긴지라 가치를 이것이다.",
-  },
-  {
-    id: 3,
-    content:
-      "공통질문 3번을 작성합니다. 수 튼튼하며, 황금시대를 끓는다. 있으며, 힘차게 긴지라 심장의 못할 사막이다. 없으면 긴지라 가치를 이것이다.",
-  },
-];
+const VLine = styled.div`
+  border-left: 1px solid white;
+  min-height: 100vh;
+`;
 
 const DocumentItemsPage = () => {
   const navigate = useNavigate();
+  const [questions, setQuestions] = useState([]);
+
+  const fetchQuestions = async () => {
+    try {
+      const data = await apiModule.fetchQuestions();
+      setQuestions(data);
+    } catch (err) {
+      console.error("error:", err);
+    }
+  };
+
+  useEffect(() => {
+    fetchQuestions();
+  }, []);
 
   return (
     <>
       <Logo />
       <S.Layout>
         <Navbar />
+        <VLine></VLine>
         <S.Container>
           <S.Title>서류 문항 관리</S.Title>
           <S.About>지원 서류 문항을 관리합니다.</S.About>
           <S.RowDiv>
             <S.Title>공통 문항</S.Title>
           </S.RowDiv>
-          {questions.map((data) => (
+          {questions[0]?.map((data) => (
             <QuestionContainer key={data.id}>
               <QuestionDiv>{data.content}</QuestionDiv>
             </QuestionContainer>
@@ -101,7 +106,7 @@ const DocumentItemsPage = () => {
           <S.RowDiv>
             <S.Title>기획 · 디자인 트랙 문항</S.Title>
           </S.RowDiv>
-          {questions.map((data) => (
+          {questions[1]?.map((data) => (
             <QuestionContainer key={data.id}>
               <QuestionDiv>{data.content}</QuestionDiv>
             </QuestionContainer>
@@ -110,7 +115,7 @@ const DocumentItemsPage = () => {
           <S.RowDiv>
             <S.Title>프론트엔드 트랙 문항</S.Title>
           </S.RowDiv>
-          {questions.map((data) => (
+          {questions[2]?.map((data) => (
             <QuestionContainer key={data.id}>
               <QuestionDiv>{data.content}</QuestionDiv>
             </QuestionContainer>
@@ -119,7 +124,7 @@ const DocumentItemsPage = () => {
           <S.RowDiv>
             <S.Title>백엔드 트랙 문항</S.Title>
           </S.RowDiv>
-          {questions.map((data) => (
+          {questions[3]?.map((data) => (
             <QuestionContainer key={data.id}>
               <QuestionDiv>{data.content}</QuestionDiv>
             </QuestionContainer>

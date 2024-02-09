@@ -15,6 +15,9 @@ import { ThemeProvider } from "styled-components";
 import theme from "./style/theme";
 import GlobalStyle from "./style/GlobalStyle";
 import DocumentItemsEditPage from "./pages/recruit/DocumentItemsEditPage";
+import DocumentDetailPage from "./pages/recruit/DocumentDetailPage";
+import InterviewTimePage from "./pages/recruit/InterviewTimePage";
+import PassFinalPage from "./pages/recruit/PassFinalPage";
 
 function App() {
   return (
@@ -41,7 +44,18 @@ function App() {
             path="/sooklion-admin/editdocument"
             element={<DocumentItemsEditPage />}
           />
-          {/* </Route> */}
+          <Route
+            path="/sooklion-admin/apply/:id"
+            element={<DocumentDetailPage />}
+          />
+          <Route
+            path="/sooklion-admin/interview"
+            element={<InterviewTimePage />}
+          />
+          <Route
+            path="/sooklion-admin/pass-final"
+            element={<PassFinalPage />}
+          />
         </Routes>
       </Router>
     </ThemeProvider>
