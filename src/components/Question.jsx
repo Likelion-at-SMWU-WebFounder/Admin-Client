@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
+import apiModule from "../api/apiModule";
 import styled from "styled-components";
-import axios from "axios";
 
 const Question = ({ documentData }) => {
   const [questions, setQuestions] = useState([]);
@@ -8,48 +8,35 @@ const Question = ({ documentData }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (documentData) {
-      const fetchDocuments = async () => {
-        const baseUrl =
-          "http://localhost:8080/api/manage/docs/quest/?year=2024&track=";
-        const tracks = ["common", "pm", "fe", "be"];
+    const fetchDocuments = async () => {
+      try {
+        const data = await apiModule.fetchQuestions(); // 모듈 사용
+        setQuestions(data);
 
-        try {
-          const responses = await Promise.all(
-            tracks.map((track) => axios.get(baseUrl + track))
-          );
-          const data = responses.map((response) => response.data.result);
-          console.log(data);
-
-          setQuestions(data);
-
-          if (documentData.studentInfo) {
-            switch (documentData.studentInfo.track) {
-              case "pm":
-                setTrackQuestions(data[1]?.map((item) => item.content) || []);
-                break;
-              case "fe":
-                setTrackQuestions(data[2]?.map((item) => item.content) || []);
-                break;
-              case "be":
-                setTrackQuestions(data[3]?.map((item) => item.content) || []);
-                break;
-              default:
-                setTrackQuestions(data[0]?.map((item) => item.content) || []);
-            }
+        if (documentData.studentInfo) {
+          switch (documentData.studentInfo.track) {
+            case "pm":
+              setTrackQuestions(data[1]?.map((item) => item.content) || []);
+              break;
+            case "fe":
+              setTrackQuestions(data[2]?.map((item) => item.content) || []);
+              break;
+            case "be":
+              setTrackQuestions(data[3]?.map((item) => item.content) || []);
+              break;
+            default:
+              setTrackQuestions(data[0]?.map((item) => item.content) || []);
           }
-
-          console.log(trackQuestions);
-
-          setLoading(false);
-        } catch (err) {
-          console.error(err);
-          setLoading(false);
         }
-      };
 
-      fetchDocuments();
-    }
+        setLoading(false);
+      } catch (err) {
+        console.error(err);
+        setLoading(false);
+      }
+    };
+
+    fetchDocuments();
   }, [documentData]);
 
   if (loading) {
