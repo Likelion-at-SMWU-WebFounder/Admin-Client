@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import apiModule from "../../api/apiModule";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import * as S from "../../style/LayoutStyle";
@@ -72,27 +72,17 @@ const DocumentItemsPage = () => {
   const navigate = useNavigate();
   const [questions, setQuestions] = useState([]);
 
-  const fetchDocuments = async () => {
-    const baseUrl =
-      "http://localhost:8080/api/manage/docs/quest/?year=2024&track=";
-    const tracks = ["common", "pm", "fe", "be"];
-
+  const fetchQuestions = async () => {
     try {
-      const responses = await Promise.all(
-        tracks.map((track) => axios.get(baseUrl + track))
-      );
-      const data = responses.map((response) => response.data.result);
-
-      console.log(data);
-
+      const data = await apiModule.fetchQuestions();
       setQuestions(data);
     } catch (err) {
-      console.error(err);
+      console.error("error:", err);
     }
   };
 
   useEffect(() => {
-    fetchDocuments();
+    fetchQuestions();
   }, []);
 
   return (
