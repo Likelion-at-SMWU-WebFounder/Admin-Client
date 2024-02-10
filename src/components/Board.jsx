@@ -152,7 +152,12 @@ const Board = () => {
       {type === "type2" && (
         <S.ButtonContainer>
           <S.ButtonSet>
-            <DeleteButton onClick={() => onDelete(checkedItems)}>
+            <DeleteButton
+              onClick={() => {
+                onDelete(checkedItems);
+                setCheckedItems([]);
+              }}
+            >
               삭제
             </DeleteButton>
           </S.ButtonSet>
@@ -161,10 +166,20 @@ const Board = () => {
       {type === "type3" && !showPopup && (
         <S.ButtonContainer>
           <S.ButtonSet>
-            <AddButton onClick={() => onAdd(checkedItems)}>
+            <AddButton
+              onClick={() => {
+                onAdd(checkedItems);
+                setCheckedItems([]);
+              }}
+            >
               최종합격자 테이블에 추가 +
             </AddButton>
-            <DeleteButton onClick={() => onDelete(checkedItems)}>
+            <DeleteButton
+              onClick={() => {
+                onDelete(checkedItems);
+                setCheckedItems([]);
+              }}
+            >
               삭제
             </DeleteButton>
           </S.ButtonSet>
