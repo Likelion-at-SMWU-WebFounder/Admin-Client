@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import axiosInstance from "../api/axiosInstance";
+import apiModule from "../api/apiModule";
 
 const PopupOverlay = styled.div`
   position: fixed;
@@ -31,8 +33,9 @@ const HopeTimeContainer = styled.div`
 `;
 
 const Ul = styled.ul`
-  margin-top: 30px;
+  /* margin-top: 30px; */
   margin-left: 30px;
+  max-height: 50%;
 `;
 
 const TimeDiv = styled.li`
@@ -88,14 +91,46 @@ const SaveButton = styled.button`
   box-sizing: content-box;
 `;
 
-const TimePopup = ({ track, aname, onClose, onSave }) => {
+const TimePopup = ({ track, aname, joinerId, onClose, onSave }) => {
   const [selectedDate, setSelectedDate] = useState("");
   const [selectedTime, setSelectedTime] = useState("");
+  const [selectedInterview, setSelectedInterview] = useState([]);
 
-  const handleSave = () => {
-    onSave(selectedDate, selectedTime);
-    onClose();
+  const handleSave = async () => {
+    console.log(selectedDate);
+    console.log(selectedTime);
+    try {
+      await apiModule.saveInterviewTime({
+        interviewDate: selectedDate,
+        interviewTime: selectedTime,
+        joinerId: joinerId,
+      });
+      onSave(selectedDate, selectedTime);
+      onClose();
+    } catch (err) {
+      console.log(err);
+    }
   };
+
+  useEffect(() => {
+    const fetchInterviewTime = async () => {
+      console.log("joinerId", joinerId);
+      try {
+        if (joinerId) {
+          // joinerId가 유효한 경우에만 실행
+          const data = await apiModule.fetchInterviewTime(joinerId);
+          setSelectedInterview(data);
+          console.log(data);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    fetchInterviewTime(); // 이 부분에서 joinerId가 변경되지 않도록 설정
+  }, []);
+  console.log(aname);
+  console.log(track);
 
   return (
     <PopupOverlay>
@@ -106,10 +141,17 @@ const TimePopup = ({ track, aname, onClose, onSave }) => {
             <Bold>{track}</Bold> 트랙 서류합격자 <Bold>{aname}</Bold>님 희망
             면접 시간
           </div>
-          <Ul>
-            <TimeDiv>3.15 수 17:00- 17:40</TimeDiv>
-            <TimeDiv>3.15 수 17:00- 17:40</TimeDiv>
-          </Ul>
+          {/* {selectedInterview?.map((item, idx) => {
+            <Ul key={idx}>
+              <TimeDiv>{item}</TimeDiv>;
+            </Ul>;
+          })}
+           */}
+          {Object.keys(selectedInterview).map((key, idx) => (
+            <Ul key={idx}>
+              <TimeDiv> {selectedInterview[key]}</TimeDiv>
+            </Ul>
+          ))}
 
           <h2 style={{ fontSize: "30px", margin: "30px auto" }}>
             면접 확정 시간을 입력해주세요
@@ -119,18 +161,18 @@ const TimePopup = ({ track, aname, onClose, onSave }) => {
             onChange={(e) => setSelectedDate(e.target.value)}
           >
             <option value="">날짜 선택</option>
-            <option value="3.15 (수)">3.15 (수)</option>
-            <option value="3.16 (목)">3.16 (목)</option>
-            <option value="3.17 (금)">3.17 (금)</option>
+            <option value="2.29 (목)">2.29 (목)</option>
+            <option value="3.1 (금)">3.1 (금)</option>
           </Select>
           <Select
             value={selectedTime}
             onChange={(e) => setSelectedTime(e.target.value)}
           >
             <option value="">시간 선택</option>
-            <option value="17:00- 17:40">17:00- 17:40</option>
-            <option value="17:00- 17:40">17:00- 17:40</option>
-            <option value="17:00- 17:40">17:00- 17:40</option>
+            <option value="17:00~17:20">17:00~17:20</option>
+            <option value="17:40~18:00">17:40~18:00</option>
+            <option value="18:20~18:40">18:20~18:40</option>
+            <option value="19:00~19:20">19:00~19:20</option>
           </Select>
         </HopeTimeContainer>
         <SaveButton onClick={handleSave}>저장</SaveButton>

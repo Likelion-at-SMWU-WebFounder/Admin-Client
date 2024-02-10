@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import * as S from "../style/LayoutStyle";
 import Posts from "./Posts";
@@ -84,8 +84,21 @@ const Board = () => {
     { value: "back", label: "백엔드" },
   ];
 
-  const [selectTrack, setSelectTrack] = useState(tracks[0]);
+  const [checkedItems, setCheckedItems] = useState([]);
+  console.log("checkedItems", checkedItems);
 
+  const [showPopup, setShowPopup] = useState(false);
+
+  useEffect(() => {
+    if (showPopup) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [showPopup]);
   return (
     <BoardContainer>
       <Wrapper>
@@ -104,13 +117,59 @@ const Board = () => {
           isSearchable={false}
         ></StyledSelect>
       </Wrapper>
-      <Posts list={postsData(boardList)} />
-      <Pagination
-        limit={limit}
-        page={page}
-        totalPosts={boardList.length}
-        setPage={setPage}
-      />
+      {type === "type3" && (
+        <TimePosts
+          list={filteredPosts}
+          checkedItems={checkedItems}
+          setCheckedItems={setCheckedItems}
+          showPopup={showPopup}
+          setShowPopup={setShowPopup}
+        />
+      )}
+      {(type === "type1" || type === "type2") && (
+        <Posts
+          list={filteredPosts}
+          checkedItems={checkedItems}
+          setCheckedItems={setCheckedItems}
+        />
+      )}
+      {!showPopup && (
+        <Pagination
+          limit={limit}
+          page={page}
+          totalPosts={filteredPostsLength}
+          setPage={setPage}
+        />
+      )}
+      {type === "type1" && (
+        <S.ButtonContainer>
+          <S.ButtonSet>
+            <ResetButton>지원자 초기화</ResetButton>
+            <AddButton>합격자 테이블에 추가 + </AddButton>
+          </S.ButtonSet>
+        </S.ButtonContainer>
+      )}
+      {type === "type2" && (
+        <S.ButtonContainer>
+          <S.ButtonSet>
+            <DeleteButton onClick={() => onDelete(checkedItems)}>
+              삭제
+            </DeleteButton>
+          </S.ButtonSet>
+        </S.ButtonContainer>
+      )}
+      {type === "type3" && !showPopup && (
+        <S.ButtonContainer>
+          <S.ButtonSet>
+            <AddButton onClick={() => onAdd(checkedItems)}>
+              최종합격자 테이블에 추가 +
+            </AddButton>
+            <DeleteButton onClick={() => onDelete(checkedItems)}>
+              삭제
+            </DeleteButton>
+          </S.ButtonSet>
+        </S.ButtonContainer>
+      )}
     </BoardContainer>
   );
 };
