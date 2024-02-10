@@ -131,7 +131,7 @@ const TimePosts = ({
   const onCheckBoxAll = (e) => {
     if (e.target.checked) {
       const checkedListArr = [];
-      list.forEach((item) => checkedListArr.push(item.id));
+      list.forEach((item) => checkedListArr.push(item.joinerId));
       setCheckedItems(checkedListArr);
     } else {
       setCheckedItems([]);
@@ -145,9 +145,9 @@ const TimePosts = ({
     const isChecked = e.target.checked;
     setCheckedItems((prevCheckedItems) => {
       if (isChecked) {
-        return [...prevCheckedItems, item.id];
+        return [...prevCheckedItems, item.joinerId];
       } else {
-        return prevCheckedItems.filter((no) => no !== item.id);
+        return prevCheckedItems.filter((no) => no !== item.joinerId);
       }
     });
   };
@@ -179,10 +179,10 @@ const TimePosts = ({
                   />
                 )}
               </Cell>
-              <Cell>{data.id}</Cell>
+              <Cell>{data.joinerId}</Cell>
               <Cell>{data.name}</Cell>
-              <Cell>{data.phone}</Cell>
-              <Cell>{data.num}</Cell>
+              <Cell>{data.phoneNum}</Cell>
+              <Cell>{data.studentID}</Cell>
               <Cell>{data.track}</Cell>
               <Cell>
                 {interviewTimes[data.joinerId]

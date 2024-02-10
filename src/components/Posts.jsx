@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 
 const StyledInput = styled.input`
@@ -63,11 +63,13 @@ const ContentTitle = styled.div`
 const TableCell = styled.div`
   display: table-cell;
   padding: 8px;
+  white-space: nowrap;
 `;
 
 const Cell = styled.div`
   display: table-cell;
   padding: 8px;
+  white-space: nowrap;
   /* border: 1px solid white; */
   /* flex-direction: column; */
 `;
@@ -108,14 +110,13 @@ const Content = styled.div`
 
 const ImageWrap = styled.div``;
 
-const Posts = ({ list }) => {
-  const [checkedItems, setCheckedItems] = useState([]);
-
+const Posts = ({ list, checkedItems, setCheckedItems }) => {
+  console.log("list", list);
   // 전체 체크
   const onCheckBoxAll = (e) => {
     if (e.target.checked) {
       const checkedListArr = [];
-      list.forEach((item) => checkedListArr.push(item.id));
+      list.forEach((item) => checkedListArr.push(item.joinerId));
       setCheckedItems(checkedListArr);
     } else {
       setCheckedItems([]);
@@ -129,11 +130,15 @@ const Posts = ({ list }) => {
     const isChecked = e.target.checked;
     setCheckedItems((prevCheckedItems) => {
       if (isChecked) {
-        return [...prevCheckedItems, item.id];
+        return [...prevCheckedItems, item.joinerId];
       } else {
-        return prevCheckedItems.filter((no) => no !== item.id);
+        return prevCheckedItems.filter((no) => no !== item.joinerId);
       }
     });
+  };
+
+  const openDetailDocument = (joinerId) => {
+    window.open(`/sooklion-admin/apply/${joinerId}`, "_blank");
   };
 
   return (
@@ -158,16 +163,18 @@ const Posts = ({ list }) => {
                 <StyledInput
                   type="checkbox"
                   onChange={(e) => onChangeCheckBox(e, data)}
-                  checked={checkedItems.includes(data.id)}
+                  checked={checkedItems.includes(data.joinerId)}
                 />
               </Cell>
-              <Cell>{data.id}</Cell>
+              <Cell>{data.joinerId}</Cell>
               <Cell>{data.name}</Cell>
-              <Cell>{data.phone}</Cell>
-              <Cell>{data.num}</Cell>
+              <Cell>{data.phoneNum}</Cell>
+              <Cell>{data.studentID}</Cell>
               <Cell>{data.track}</Cell>
-              <Cell>{data.time}</Cell>
-              <Button>서류 확인</Button>
+              <Cell>{data.submissionTime}</Cell>
+              <Button onClick={() => openDetailDocument(data.joinerId)}>
+                서류 확인
+              </Button>
             </Content>
           ))
         ) : (

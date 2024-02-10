@@ -1,16 +1,10 @@
-import {
-  Routes,
-  Route,
-  BrowserRouter as Router,
-  useLocation,
-} from "react-router-dom";
+import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
 import "./App.css";
 import HomePage from "./pages/home/HomePage";
 import LoginPage from "./pages/login/LoginPage";
 import ApplicationStatusPage from "./pages/recruit/ApplicationStatusPage";
 import PassedApplicantsPage from "./pages/recruit/PassedApplicantsPage";
 import DocumentItemsPage from "./pages/recruit/DocumentItemsPage";
-import Navbar from "./components/Navbar";
 import { ThemeProvider } from "styled-components";
 import theme from "./style/theme";
 import GlobalStyle from "./style/GlobalStyle";
@@ -45,7 +39,7 @@ function App() {
             element={<DocumentItemsEditPage />}
           />
           <Route
-            path="/sooklion-admin/apply/:id"
+            path="/sooklion-admin/apply/:joinerId"
             element={<DocumentDetailPage />}
           />
           <Route

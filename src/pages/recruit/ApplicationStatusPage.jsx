@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import apiModule from "../../api/apiModule";
 import styled from "styled-components";
 import * as S from "../../style/LayoutStyle";
 import Navbar from "../../components/Navbar";
@@ -46,46 +47,13 @@ const StateNum = styled.div`
   letter-spacing: -2.273px;
 `;
 
-const ResetButton = styled.button`
-  border: none;
-  margin-right: 20px;
-  border-radius: 5px;
-  background: #f4a6a6;
-  width: 197px;
-  height: 56px;
-  flex-shrink: 0;
-  color: #000;
-  text-align: center;
-  font-size: 28px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-  letter-spacing: -1.414px;
-`;
-
-const AddButton = styled.button`
-  border: none;
-  margin-right: 20px;
-  border-radius: 5px;
-  background: #8fe088;
-  width: 315px;
-  height: 56px;
-  flex-shrink: 0;
-  color: #000;
-  text-align: center;
-  font-size: 28px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-  letter-spacing: -1.414px;
-`;
-
 const VLine = styled.div`
   border-left: 1px solid white;
   min-height: 100vh;
 `;
 
 const ApplicationStatusPage = () => {
+  const [docs, setDocs] = useState([]);
   const easeOutExpo = (t) => {
     return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
   };
@@ -108,6 +76,36 @@ const ApplicationStatusPage = () => {
     }, [end, frameRate, start, totalFrame]);
 
     return count;
+  };
+
+  // TODO : 지원자 현황 조회
+  // const fetchDocsResult = async () => {
+  //   const url = "/api/manage/docs/result";
+  //   const tracks = ["all", "pm", "fe", "be"];
+
+  //   try {
+  //     const responses = await Promise.all(
+  //       tracks.map((track) => axios.get(baseUrl + url, { params: { track } }))
+  //     );
+  //     const data = responses.map((response) => response.data.result);
+  //     setDocs(data);
+  //     console.log(data);
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   // fetchDocsResult();
+  //   console.log(docs);
+  // }, []);
+
+  const handleAddToDocs = async (checkedItems) => {
+    try {
+      await apiModule.addToDocs(checkedItems);
+    } catch (error) {
+      console.error(error);
+    }
   };
   return (
     <>
@@ -139,13 +137,7 @@ const ApplicationStatusPage = () => {
               <StateNum>{useCountNum(60, 0, 2000)}명</StateNum>
             </StateBox>
           </StateContainer>
-          <Board />
-          <S.ButtonContainer>
-            <S.ButtonSet>
-              <ResetButton>지원자 초기화</ResetButton>
-              <AddButton>합격자 테이블에 추가 + </AddButton>
-            </S.ButtonSet>
-          </S.ButtonContainer>
+          <Board pass={docs} type="type1" onAdd={handleAddToDocs} />
         </S.Container>
       </S.Layout>
     </>
