@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import * as S from "../style/LayoutStyle";
 import Posts from "./Posts";
@@ -198,6 +198,19 @@ const Board = ({ pass, type, checking, onAdd, onDelete }) => {
 
   const [checkedItems, setCheckedItems] = useState([]);
   console.log("checkedItems", checkedItems);
+
+  const [showPopup, setShowPopup] = useState(false);
+
+  useEffect(() => {
+    if (showPopup) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [showPopup]);
   return (
     <BoardContainer>
       <Wrapper>
@@ -215,6 +228,8 @@ const Board = ({ pass, type, checking, onAdd, onDelete }) => {
           list={filteredPosts}
           checkedItems={checkedItems}
           setCheckedItems={setCheckedItems}
+          showPopup={showPopup}
+          setShowPopup={setShowPopup}
         />
       )}
       {(type === "type1" || type === "type2") && (
@@ -224,13 +239,14 @@ const Board = ({ pass, type, checking, onAdd, onDelete }) => {
           setCheckedItems={setCheckedItems}
         />
       )}
-
-      <Pagination
-        limit={limit}
-        page={page}
-        totalPosts={filteredPostsLength}
-        setPage={setPage}
-      />
+      {!showPopup && (
+        <Pagination
+          limit={limit}
+          page={page}
+          totalPosts={filteredPostsLength}
+          setPage={setPage}
+        />
+      )}
       {type === "type1" && (
         <S.ButtonContainer>
           <S.ButtonSet>
@@ -248,7 +264,7 @@ const Board = ({ pass, type, checking, onAdd, onDelete }) => {
           </S.ButtonSet>
         </S.ButtonContainer>
       )}
-      {type === "type3" && (
+      {type === "type3" && !showPopup && (
         <S.ButtonContainer>
           <S.ButtonSet>
             <AddButton onClick={() => onAdd(checkedItems)}>

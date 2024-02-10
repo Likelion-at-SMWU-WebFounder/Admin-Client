@@ -105,6 +105,31 @@ const apiModule = {
       throw new Error(err);
     }
   },
+
+  fetchInterviewTime: async (joinerId) => {
+    const url = `/api/manage/interviewtime/${joinerId}`;
+    try {
+      const response = await axiosInstance.get(url);
+      console.log(response.data.result);
+      return response.data.result;
+    } catch (err) {
+      throw new Error(err);
+    }
+  },
+
+  saveInterviewTime: async ({ interviewDate, interviewTime, joinerId }) => {
+    const url = "/api/manage/interviewtime";
+    try {
+      const response = await axiosInstance.post(url, {
+        interviewDate,
+        interviewTime,
+        joinerId,
+      });
+      return response.data;
+    } catch (err) {
+      throw new Error(err);
+    }
+  },
 };
 
 export default apiModule;
