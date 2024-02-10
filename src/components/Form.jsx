@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 
 import styled from "styled-components";
 
+// TODO : img 잘 나오는지 확인
+// TODO : 이메일 추가
 const Form = ({ documentData }) => {
   return (
     <>
@@ -27,7 +29,6 @@ const Form = ({ documentData }) => {
         marginTop="25px"
         style={{ fontWeight: "200" }}
       ></Text>
-
       <Hr marginTop="80px" marginBottom="70px" />
       <Row>
         <FormContainer>
@@ -39,7 +40,6 @@ const Form = ({ documentData }) => {
           <Div>{documentData && documentData.answerList[1]}</Div>
         </FormContainer>
       </Row>
-
       <Row>
         <FormContainer>
           <Text fontSize="20px">학번</Text>
@@ -50,11 +50,9 @@ const Form = ({ documentData }) => {
           <Div>{documentData && documentData.answerList[3]}</Div>
         </FormContainer>
       </Row>
-
       <Row style={{ marginLeft: "570px" }}>
         <Text fontSize="13px" marginBottom="12px"></Text>
       </Row>
-
       <Row>
         <FormContainer>
           <Text fontSize="20px">수료 학기</Text>
@@ -65,17 +63,16 @@ const Form = ({ documentData }) => {
           <Div>{documentData && documentData.answerList[5]}</Div>
         </FormContainer>
       </Row>
-
       <Row>
         <FormContainer>
           <Text fontSize="20px">졸업 예정 연도</Text>
           <Div>{documentData && documentData.studentInfo.graduatedYear}</Div>
         </FormContainer>
-        <FormContainer style={{ visibility: "hidden" }}>
-          <Text></Text>
+        <FormContainer>
+          <Text fontSize="20px">이메일</Text>
+          {/* <Div>{documentData && documentData.studentInfo.graduatedYear}</Div> */}
         </FormContainer>
       </Row>
-
       <Row>
         <FormContainer>
           <Text fontSize="20px">프로그래머스 수강 여부</Text>
@@ -91,7 +88,6 @@ const Form = ({ documentData }) => {
             </FormContainer>
           )}
       </Row>
-
       <Hr marginTop="70px" />
     </>
   );
