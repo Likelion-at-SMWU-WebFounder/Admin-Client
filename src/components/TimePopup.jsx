@@ -1,0 +1,184 @@
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+import axiosInstance from "../api/axiosInstance";
+import apiModule from "../api/apiModule";
+
+const PopupOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const PopupContent = styled.div`
+  position: relative;
+  color: black;
+  background-color: white;
+  border-radius: 10px;
+  width: 1000px;
+  height: 750px;
+  padding: 50px;
+`;
+
+const HopeTimeContainer = styled.div`
+  position: absolute;
+  top: 127px;
+  font-size: 30px;
+  margin-top: 0px;
+`;
+
+const Ul = styled.ul`
+  /* margin-top: 30px; */
+  margin-left: 30px;
+  max-height: 50%;
+`;
+
+const TimeDiv = styled.li`
+  font-size: 25px;
+  list-style-type: disc;
+`;
+
+const Bold = styled.span`
+  font-weight: bolder;
+`;
+
+const Select = styled.select`
+  padding: 10px;
+  margin-right: 30px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 200px;
+`;
+
+const CancelButton = styled.button`
+  padding: 10px 20px;
+  position: absolute;
+  right: 16px;
+  top: 30px;
+  font-size: 55px;
+  border-radius: 5px;
+  border: none;
+  background: none;
+  color: black;
+  cursor: pointer;
+`;
+
+const SaveButton = styled.button`
+  position: absolute;
+  bottom: 27px;
+  right: 16px;
+  border: none;
+  margin-right: 20px;
+  border-radius: 5px;
+  background: #9fb9fd;
+  width: 80px;
+  height: 44px;
+  flex-shrink: 0;
+  color: #000;
+  text-align: center;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 38px;
+  letter-spacing: -0.0505em;
+  text-align: center;
+
+  box-sizing: content-box;
+`;
+
+const TimePopup = ({ track, aname, joinerId, onClose, onSave }) => {
+  const [selectedDate, setSelectedDate] = useState("");
+  const [selectedTime, setSelectedTime] = useState("");
+  const [selectedInterview, setSelectedInterview] = useState([]);
+
+  const handleSave = async () => {
+    console.log(selectedDate);
+    console.log(selectedTime);
+    try {
+      await apiModule.saveInterviewTime({
+        interviewDate: selectedDate,
+        interviewTime: selectedTime,
+        joinerId: joinerId,
+      });
+      onSave(selectedDate, selectedTime);
+      onClose();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    const fetchInterviewTime = async () => {
+      console.log("joinerId", joinerId);
+      try {
+        if (joinerId) {
+          // joinerId가 유효한 경우에만 실행
+          const data = await apiModule.fetchInterviewTime(joinerId);
+          setSelectedInterview(data);
+          console.log(data);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    fetchInterviewTime(); // 이 부분에서 joinerId가 변경되지 않도록 설정
+  }, []);
+  console.log(aname);
+  console.log(track);
+
+  return (
+    <PopupOverlay>
+      <PopupContent>
+        <CancelButton onClick={onClose}>x</CancelButton>
+        <HopeTimeContainer>
+          <div>
+            <Bold>{track}</Bold> 트랙 서류합격자 <Bold>{aname}</Bold>님 희망
+            면접 시간
+          </div>
+          {/* {selectedInterview?.map((item, idx) => {
+            <Ul key={idx}>
+              <TimeDiv>{item}</TimeDiv>;
+            </Ul>;
+          })}
+           */}
+          {Object.keys(selectedInterview).map((key, idx) => (
+            <Ul key={idx}>
+              <TimeDiv> {selectedInterview[key]}</TimeDiv>
+            </Ul>
+          ))}
+
+          <h2 style={{ fontSize: "30px", margin: "30px auto" }}>
+            면접 확정 시간을 입력해주세요
+          </h2>
+          <Select
+            value={selectedDate}
+            onChange={(e) => setSelectedDate(e.target.value)}
+          >
+            <option value="">날짜 선택</option>
+            <option value="2.29 (목)">2.29 (목)</option>
+            <option value="3.1 (금)">3.1 (금)</option>
+          </Select>
+          <Select
+            value={selectedTime}
+            onChange={(e) => setSelectedTime(e.target.value)}
+          >
+            <option value="">시간 선택</option>
+            <option value="17:00~17:20">17:00~17:20</option>
+            <option value="17:40~18:00">17:40~18:00</option>
+            <option value="18:20~18:40">18:20~18:40</option>
+            <option value="19:00~19:20">19:00~19:20</option>
+          </Select>
+        </HopeTimeContainer>
+        <SaveButton onClick={handleSave}>저장</SaveButton>
+      </PopupContent>
+    </PopupOverlay>
+  );
+};
+
+export default TimePopup;

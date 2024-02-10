@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import TimePopup from "./TimePopup";
 
 const StyledInput = styled.input`
   position: relative;
@@ -63,13 +64,11 @@ const ContentTitle = styled.div`
 const TableCell = styled.div`
   display: table-cell;
   padding: 8px;
-  white-space: nowrap;
 `;
 
 const Cell = styled.div`
   display: table-cell;
   padding: 8px;
-  white-space: nowrap;
   /* border: 1px solid white; */
   /* flex-direction: column; */
 `;
@@ -110,9 +109,25 @@ const Content = styled.div`
 
 const ImageWrap = styled.div``;
 
-const Posts = ({ list, checkedItems, setCheckedItems }) => {
-  console.log("list", list);
-  // 전체 체크
+// TODO : 면접 시간
+const TimePosts = ({
+  list,
+  checkedItems,
+  setCheckedItems,
+  showPopup,
+  setShowPopup,
+}) => {
+  const [interviewTimes, setInterviewTimes] = useState({});
+  const [selectedItemId, setSelectedItemId] = useState(null);
+
+  // TODO : 면접 시간 단순 get
+  const saveInterviewTime = (joinerId, date, time) => {
+    setInterviewTimes((prevTimes) => ({
+      ...prevTimes,
+      [joinerId]: { date, time }, // joinerId를 키로 사용하여 각 아이템의 면접 시간을 저장
+    }));
+  };
+
   const onCheckBoxAll = (e) => {
     if (e.target.checked) {
       const checkedListArr = [];
@@ -137,10 +152,6 @@ const Posts = ({ list, checkedItems, setCheckedItems }) => {
     });
   };
 
-  const openDetailDocument = (joinerId) => {
-    window.open(`/sooklion-admin/apply/${joinerId}`, "_blank");
-  };
-
   return (
     <Table>
       <ContentWrap>
@@ -153,27 +164,52 @@ const Posts = ({ list, checkedItems, setCheckedItems }) => {
           <TableCell>전화번호</TableCell>
           <TableCell>학번</TableCell>
           <TableCell>지원트랙</TableCell>
-          <TableCell>서류 제출 시간</TableCell>
+          <TableCell>면접 시간</TableCell>
           <TableCell></TableCell>
         </ContentTitle>
         {list !== undefined ? (
           list.map((data, idx) => (
             <Content key={idx}>
               <Cell>
-                <StyledInput
-                  type="checkbox"
-                  onChange={(e) => onChangeCheckBox(e, data)}
-                  checked={checkedItems.includes(data.joinerId)}
-                />
+                {!showPopup && (
+                  <StyledInput
+                    type="checkbox"
+                    onChange={(e) => onChangeCheckBox(e, data)}
+                    checked={checkedItems.includes(data.joinerId)}
+                  />
+                )}
               </Cell>
               <Cell>{data.joinerId}</Cell>
               <Cell>{data.name}</Cell>
               <Cell>{data.phoneNum}</Cell>
               <Cell>{data.studentID}</Cell>
               <Cell>{data.track}</Cell>
-              <Cell>{data.submissionTime}</Cell>
-              <Button onClick={() => openDetailDocument(data.joinerId)}>
-                서류 확인
+              <Cell>
+                {interviewTimes[data.joinerId]
+                  ? `${interviewTimes[data.joinerId].date} ${
+                      interviewTimes[data.joinerId].time
+                    }`
+                  : "-"}
+              </Cell>
+
+              {showPopup && selectedItemId === data.joinerId && (
+                <TimePopup
+                  track={data.track}
+                  aname={data.name}
+                  joinerId={data.joinerId}
+                  onClose={() => setShowPopup(false)}
+                  onSave={(date, time) => {
+                    saveInterviewTime(data.joinerId, date, time);
+                  }}
+                />
+              )}
+              <Button
+                onClick={() => {
+                  setShowPopup(true);
+                  setSelectedItemId(data.joinerId);
+                }}
+              >
+                면접 시간 입력
               </Button>
             </Content>
           ))
@@ -187,4 +223,4 @@ const Posts = ({ list, checkedItems, setCheckedItems }) => {
   );
 };
 
-export default Posts;
+export default TimePosts;

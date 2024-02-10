@@ -9,6 +9,8 @@ const QuestionContainer = styled.div``;
 const QuestionInput = styled.textarea`
   padding: 10px 10px;
   min-width: 1000px;
+  height: fit-content;
+  min-height: 150px;
   border-radius: 15px;
   border: 1px solid #fff;
   background: rgba(217, 217, 217, 0);
@@ -65,7 +67,18 @@ const VLine = styled.div`
   min-height: 100vh;
 `;
 
+// TODO : 문항 수정
+
 const DocumentItemsEditPage = () => {
+  // const addQuestion = async () => {
+  //   const baseUrl = "http://localhost:8080/api/manage/docs/quest";
+  //   try {
+  //     await axios.post(baseUrl,{
+
+  //     })
+  //   }
+  // };
+
   const [commonItemCount, setCommonItemCount] = useState(3); // 초기 입력 수를 3으로 가정합니다.
   const [designItemCount, setDesignItemCount] = useState(3);
   const [frontendItemCount, setFrontendItemCount] = useState(3);
