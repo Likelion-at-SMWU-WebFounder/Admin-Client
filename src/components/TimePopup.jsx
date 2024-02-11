@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import axiosInstance from "../api/axiosInstance";
 import apiModule from "../api/apiModule";
 
 const PopupOverlay = styled.div`
@@ -30,6 +29,21 @@ const HopeTimeContainer = styled.div`
   top: 127px;
   font-size: 30px;
   margin-top: 0px;
+`;
+
+const UlDiv = styled.ul`
+  overflow-y: auto;
+  max-height: 200px;
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.4);
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 6px;
+  }
 `;
 
 const Ul = styled.ul`
@@ -141,18 +155,13 @@ const TimePopup = ({ track, aname, joinerId, onClose, onSave }) => {
             <Bold>{track}</Bold> 트랙 서류합격자 <Bold>{aname}</Bold>님 희망
             면접 시간
           </div>
-          {/* {selectedInterview?.map((item, idx) => {
-            <Ul key={idx}>
-              <TimeDiv>{item}</TimeDiv>;
-            </Ul>;
-          })}
-           */}
-          {Object.keys(selectedInterview).map((key, idx) => (
-            <Ul key={idx}>
-              <TimeDiv> {selectedInterview[key]}</TimeDiv>
-            </Ul>
-          ))}
-
+          <UlDiv>
+            {Object.keys(selectedInterview).map((key, idx) => (
+              <Ul key={idx}>
+                <TimeDiv> {selectedInterview[key]}</TimeDiv>
+              </Ul>
+            ))}
+          </UlDiv>
           <h2 style={{ fontSize: "30px", margin: "30px auto" }}>
             면접 확정 시간을 입력해주세요
           </h2>
@@ -169,10 +178,16 @@ const TimePopup = ({ track, aname, joinerId, onClose, onSave }) => {
             onChange={(e) => setSelectedTime(e.target.value)}
           >
             <option value="">시간 선택</option>
-            <option value="17:00~17:20">17:00~17:20</option>
-            <option value="17:40~18:00">17:40~18:00</option>
-            <option value="18:20~18:40">18:20~18:40</option>
-            <option value="19:00~19:20">19:00~19:20</option>
+            <option value="10:00-10:40">10:00-10:40</option>
+            <option value="11:00-11:40">11:00-11:40</option>
+            <option value="12:00-12:40">12:00-12:40</option>
+            <option value="14:00-14:40">14:00-14:40</option>
+            <option value="15:00-15:40">15:00-15:40</option>
+            <option value="16:00-16:40">16:00-16:40</option>
+            <option value="17:00-17:40">17:00-17:40</option>
+            <option value="18:00-18:40">18:00-18:40</option>
+            <option value="20:00-20:40">20:00-20:40</option>
+            <option value="21:00-21:40">21:00-21:40</option>
           </Select>
         </HopeTimeContainer>
         <SaveButton onClick={handleSave}>저장</SaveButton>

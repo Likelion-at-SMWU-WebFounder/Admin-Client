@@ -184,13 +184,7 @@ const TimePosts = ({
               <Cell>{data.phoneNum}</Cell>
               <Cell>{data.studentID}</Cell>
               <Cell>{data.track}</Cell>
-              <Cell>
-                {interviewTimes[data.joinerId]
-                  ? `${interviewTimes[data.joinerId].date} ${
-                      interviewTimes[data.joinerId].time
-                    }`
-                  : "-"}
-              </Cell>
+              <Cell>{data.interviewTime ? data.interviewTime : "-"}</Cell>
 
               {showPopup && selectedItemId === data.joinerId && (
                 <TimePopup
