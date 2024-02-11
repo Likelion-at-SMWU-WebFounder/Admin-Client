@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import apiModule from "../api/apiModule";
 import styled from "styled-components";
 
-// TODO : 트랙 문항 오류 없는지 확인
 const Question = ({ documentData }) => {
   const [questions, setQuestions] = useState([]);
   // const [trackQuestions, setTrackQuestions] = useState([]);
