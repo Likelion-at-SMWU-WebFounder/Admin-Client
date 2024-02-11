@@ -3,7 +3,6 @@ import React from "react";
 import styled from "styled-components";
 
 // TODO : img 잘 나오는지 확인
-// TODO : 이메일 추가
 const Form = ({ documentData }) => {
   return (
     <>
@@ -33,21 +32,21 @@ const Form = ({ documentData }) => {
       <Row>
         <FormContainer>
           <Text fontSize="20px">성함</Text>
-          <Div>{documentData && documentData.answerList[0]}</Div>
+          <Div>{documentData && documentData.studentInfo.name}</Div>
         </FormContainer>
         <FormContainer>
           <Text fontSize="20px">전화번호</Text>
-          <Div>{documentData && documentData.answerList[1]}</Div>
+          <Div>{documentData && documentData.studentInfo.phoneNumber}</Div>
         </FormContainer>
       </Row>
       <Row>
         <FormContainer>
           <Text fontSize="20px">학번</Text>
-          <Div>{documentData && documentData.answerList[2]}</Div>
+          <Div>{documentData && documentData.studentInfo.studentId}</Div>
         </FormContainer>
         <FormContainer>
           <Text fontSize="20px">전공</Text>
-          <Div>{documentData && documentData.answerList[3]}</Div>
+          <Div>{documentData && documentData.studentInfo.major}</Div>
         </FormContainer>
       </Row>
       <Row style={{ marginLeft: "570px" }}>
@@ -56,11 +55,11 @@ const Form = ({ documentData }) => {
       <Row>
         <FormContainer>
           <Text fontSize="20px">수료 학기</Text>
-          <Div>{documentData && documentData.answerList[4]}</Div>
+          <Div>{documentData && documentData.studentInfo.completedSem}</Div>
         </FormContainer>
         <FormContainer>
           <Text fontSize="20px">재/휴학 여부</Text>
-          <Div>{documentData && documentData.answerList[5]}</Div>
+          <Div>{documentData && documentData.studentInfo.schoolStatus}</Div>
         </FormContainer>
       </Row>
       <Row>
@@ -70,7 +69,7 @@ const Form = ({ documentData }) => {
         </FormContainer>
         <FormContainer>
           <Text fontSize="20px">이메일</Text>
-          {/* <Div>{documentData && documentData.studentInfo.graduatedYear}</Div> */}
+          <Div>{documentData && documentData.studentInfo.email}</Div>
         </FormContainer>
       </Row>
       <Row>
@@ -84,7 +83,7 @@ const Form = ({ documentData }) => {
               <Text fontSize="20px" marginLeft="130px">
                 프로그래머스 수강 인증
               </Text>
-              <img src={documentData.studentInfo.programmersImg} alt="" />
+              <Imgg src={documentData.studentInfo.programmersImg} alt="" />
             </FormContainer>
           )}
       </Row>
@@ -115,6 +114,13 @@ const TitleText = styled.div`
 
 const Img = styled.img`
   width: 300px;
+`;
+
+const Imgg = styled.img`
+  width: 300px;
+  &:hover {
+    transform: scale(2);
+  }
 `;
 
 const Hr = styled.hr`
