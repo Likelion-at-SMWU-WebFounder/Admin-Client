@@ -211,6 +211,37 @@ const Board = ({ pass, type, checking, onAdd, onDelete }) => {
       document.body.style.overflow = "auto";
     };
   }, [showPopup]);
+
+  const handleDeleteButtonClick = () => {
+    if (checkedItems.length === 0) {
+      alert("선택된 지원자가 없습니다.");
+    } else {
+      if (
+        window.confirm("선택한 지원자를 합격자 테이블에서 삭제하시겠습니까?")
+      ) {
+        onDelete(checkedItems);
+        setCheckedItems([]);
+        alert("선택한 지원자가 합격자 테이블에서 삭제되었습니다.");
+      }
+    }
+  };
+
+  const handleAddButtonClick = () => {
+    if (checkedItems.length === 0) {
+      alert("선택된 지원자가 없습니다.");
+    } else {
+      if (
+        window.confirm("선택한 지원자를 최종합격자 테이블에 추가하시겠습니까?")
+      ) {
+        onAdd(checkedItems);
+        setCheckedItems([]);
+        alert(
+          "선택한 지원자가 최종 합격자 테이블에 추가되었습니다. \n합격자 테이블은 [신규모집관리 - 최종 합격자 선정] 탭에서 확인 가능합니다. "
+        );
+      }
+    }
+  };
+
   return (
     <BoardContainer>
       <Wrapper>
@@ -258,36 +289,17 @@ const Board = ({ pass, type, checking, onAdd, onDelete }) => {
       {type === "type2" && (
         <S.ButtonContainer>
           <S.ButtonSet>
-            <DeleteButton
-              onClick={() => {
-                onDelete(checkedItems);
-                setCheckedItems([]);
-              }}
-            >
-              삭제
-            </DeleteButton>
+            <DeleteButton onClick={handleDeleteButtonClick}>삭제</DeleteButton>
           </S.ButtonSet>
         </S.ButtonContainer>
       )}
       {type === "type3" && !showPopup && (
         <S.ButtonContainer>
           <S.ButtonSet>
-            <AddButton
-              onClick={() => {
-                onAdd(checkedItems);
-                setCheckedItems([]);
-              }}
-            >
+            <AddButton onClick={handleAddButtonClick}>
               최종합격자 테이블에 추가 +
             </AddButton>
-            <DeleteButton
-              onClick={() => {
-                onDelete(checkedItems);
-                setCheckedItems([]);
-              }}
-            >
-              삭제
-            </DeleteButton>
+            <DeleteButton onClick={handleDeleteButtonClick}>삭제</DeleteButton>
           </S.ButtonSet>
         </S.ButtonContainer>
       )}
