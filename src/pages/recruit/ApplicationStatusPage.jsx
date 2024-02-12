@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import apiModule from "../../api/apiModule";
+import axios from "axios";
 import styled from "styled-components";
 import * as S from "../../style/LayoutStyle";
 import Navbar from "../../components/Navbar";
@@ -58,47 +59,25 @@ const ApplicationStatusPage = () => {
     return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
   };
 
-  const useCountNum = (end, start = 0, duration = 2000) => {
-    const [count, setCount] = useState(start);
-    const frameRate = 1000 / 60;
-    const totalFrame = Math.round(duration / frameRate);
-
-    useEffect(() => {
-      let currentNumber = start;
-      const counter = setInterval(() => {
-        const progress = easeOutExpo(++currentNumber / totalFrame);
-        setCount(Math.round(end * progress));
-
-        if (progress === 1) {
-          clearInterval(counter);
-        }
-      }, frameRate);
-    }, [end, frameRate, start, totalFrame]);
-
-    return count;
-  };
-
   // TODO : 지원자 현황 조회
-  // const fetchDocsResult = async () => {
-  //   const url = "/api/manage/docs/result";
-  //   const tracks = ["all", "pm", "fe", "be"];
+  const fetchDocsResult = async () => {
+    try {
+      const data = await apiModule.fetchFirstDocs();
+      setDocs(data);
+      console.log("data", data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+  useEffect(() => {
+    fetchDocsResult();
+    // console.log(docs);
+  }, []);
 
-  //   try {
-  //     const responses = await Promise.all(
-  //       tracks.map((track) => axios.get(baseUrl + url, { params: { track } }))
-  //     );
-  //     const data = responses.map((response) => response.data.result);
-  //     setDocs(data);
-  //     console.log(data);
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // };
+  const previewLists = docs.map((item) => item.applicationDocumentPreviewList);
+  const applicationStatus = docs.map((item) => item.applicationStatusByTrack);
 
-  // useEffect(() => {
-  //   // fetchDocsResult();
-  //   console.log(docs);
-  // }, []);
+  console.log("applicationStatus", applicationStatus);
 
   const handleAddToDocs = async (checkedItems) => {
     try {
@@ -122,22 +101,30 @@ const ApplicationStatusPage = () => {
           <StateContainer>
             <StateBox>
               <StateItem>전체 지원자 수</StateItem>
-              <StateNum>{useCountNum(140, 0, 2000)}명</StateNum>
+              {applicationStatus.length > 0 && (
+                <StateNum>{applicationStatus[0].allApplicants}명</StateNum>
+              )}
             </StateBox>
             <StateBox>
               <StateItem>기획·디자인 지원자 수</StateItem>
-              <StateNum>{useCountNum(30, 0, 2000)}명</StateNum>
+              {applicationStatus.length > 0 && (
+                <StateNum>{applicationStatus[0].pmApplicants}명</StateNum>
+              )}
             </StateBox>
             <StateBox>
               <StateItem>프론트엔드 지원자 수</StateItem>
-              <StateNum>{useCountNum(50, 0, 2000)}명</StateNum>
+              {applicationStatus.length > 0 && (
+                <StateNum>{applicationStatus[0].feApplicants}명</StateNum>
+              )}
             </StateBox>
             <StateBox>
               <StateItem>백엔드 지원자 수</StateItem>
-              <StateNum>{useCountNum(60, 0, 2000)}명</StateNum>
+              {applicationStatus.length > 0 && (
+                <StateNum>{applicationStatus[0].beApplicants}명</StateNum>
+              )}
             </StateBox>
           </StateContainer>
-          <Board pass={docs} type="type1" onAdd={handleAddToDocs} />
+          <Board pass={previewLists} type="type1" onAdd={handleAddToDocs} />
         </S.Container>
       </S.Layout>
     </>
