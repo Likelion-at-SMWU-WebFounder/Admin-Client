@@ -30,11 +30,7 @@ const customStyles = {
       borderColor: "white",
     },
   }),
-  // menu: (provided) => ({
-  //   ...provided,
-  //   backgroundColor: "pink",
-  //   color: "white",
-  // }),
+
   option: (provided, state) => ({
     ...provided,
     outline: "none",
@@ -87,43 +83,38 @@ const DeleteButton = styled.button`
   letter-spacing: -1.414px;
 `;
 
-const Board = ({ pass, type, checking, onAdd, onDelete }) => {
-  const [page, setPage] = useState(1); //페이지
-  const limit = 10; // posts가 보일 최대한의 갯수
+const Board = ({ pass, type, onAdd, onDelete }) => {
+  const [page, setPage] = useState(1);
+  const limit = 10;
 
   const [selectTrack, setSelectTrack] = useState({
     value: "all",
     label: "전체트랙",
-  }); // 선택된 트랙
+  });
 
-  const offset = (page - 1) * limit; // 시작점과 끝점을 구하는 offset
+  const offset = (page - 1) * limit;
 
   const postsData = (posts) => {
-    let filteredPosts = []; // filteredPosts 초기화
-    console.log(pass);
-    console.log(posts);
-    console.log(selectTrack.value);
+    let filteredPosts = [];
     if (posts && posts.length > 0) {
       // posts가 정의되고 배열인지 확인
       switch (selectTrack.value) {
         case "all":
-          filteredPosts = posts[0]; // data 배열의 첫 번째 요소 선택
+          filteredPosts = posts[0];
           break;
         case "pm":
-          filteredPosts = posts[1]; // data 배열의 두 번째 요소 선택
+          filteredPosts = posts[1];
           break;
         case "fe":
-          filteredPosts = posts[2]; // data 배열의 세 번째 요소 선택
+          filteredPosts = posts[2];
           break;
         case "be":
-          filteredPosts = posts[3]; // data 배열의 네 번째 요소 선택
+          filteredPosts = posts[3];
           break;
         default:
-          filteredPosts = []; // 기본값은 빈 배열로 설정
+          filteredPosts = [];
       }
     }
-    // filteredPosts = posts;
-    console.log(filteredPosts);
     let result = filteredPosts.slice(offset, offset + limit);
 
     return { filteredPosts: result, filteredPostsLength: filteredPosts.length };
@@ -171,8 +162,6 @@ const Board = ({ pass, type, checking, onAdd, onDelete }) => {
   ];
 
   const [checkedItems, setCheckedItems] = useState([]);
-  console.log("checkedItems", checkedItems);
-
   const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {

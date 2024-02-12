@@ -28,7 +28,6 @@ axiosInstance.interceptors.response.use(
   (response) => response,
   async (error) => {
     const statusCode = error.response?.status;
-    console.log("statusCode", statusCode);
     if (statusCode == 401 || statusCode === 403) {
       try {
         const refreshToken = getCookie("refreshToken");
@@ -36,7 +35,6 @@ axiosInstance.interceptors.response.use(
           removeCookie("accessToken");
           return Promise.reject(error);
         }
-        console.log("refreshToken", refreshToken);
         const refreshResponse = await axios.post(
           "http://localhost:8080/api/admin/reissue",
           null,
@@ -50,8 +48,6 @@ axiosInstance.interceptors.response.use(
             },
           }
         );
-        console.log("newAccessToken", refreshResponse);
-        console.log("newAccessTokend", refreshResponse.data.result.accessToken);
 
         const newAccessToken = refreshResponse.data.result.accessToken;
         setCookie("accessToken", newAccessToken, {

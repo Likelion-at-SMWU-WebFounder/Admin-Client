@@ -60,7 +60,6 @@ const ApplicationStatusPage = () => {
     try {
       const data = await apiModule.fetchFirstDocs();
       setDocs(data);
-      console.log("data", data);
     } catch (err) {
       console.error(err);
     }
@@ -71,8 +70,6 @@ const ApplicationStatusPage = () => {
 
   const previewLists = docs.map((item) => item.applicationDocumentPreviewList);
   const applicationStatus = docs.map((item) => item.applicationStatusByTrack);
-
-  console.log("applicationStatus", applicationStatus);
 
   const handleAddToDocs = async (checkedItems) => {
     try {

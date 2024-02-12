@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-// const PageSection = styled.div``;
 const ButtonWrap = styled.div`
   margin: 60px auto;
 `;
@@ -9,8 +8,6 @@ const Button = styled.button`
   color: white;
   margin: 5px;
   padding: 8px;
-  /* border: 1px solid #ccc; */
-  /* background-color: #fff; */
   border: none;
   background: none;
   cursor: pointer;

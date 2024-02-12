@@ -14,11 +14,7 @@ export const RowDiv = styled.div`
 
 export const HomeContainer = styled.div`
   display: flex;
-  /* flex-direction: column; */
-  /* align-items: center; */
-  /* justify-items: center; */
   justify-content: center;
-  /* text-align: center; */
   width: 100vw;
   height: 100vh;
 `;
@@ -28,12 +24,7 @@ export const Container = styled.div`
   flex-direction: column;
   margin-left: 4vw;
   margin-right: 4vw;
-  /* align-items: center; */
-  /* justify-items: center; */
-  /* justify-content: center; */
-  /* text-align: center; */
   width: 100vw;
-  /* height: 100vh; */
 `;
 
 export const Title = styled.div`

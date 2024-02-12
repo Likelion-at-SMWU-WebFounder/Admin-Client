@@ -2,13 +2,11 @@ import React from "react";
 import styled from "styled-components";
 
 const LogoContainer = styled.div`
-  /* position: relative; */
   display: flex;
   flex-direction: column;
   margin-top: 5rem;
   width: 100vw;
   margin-left: 5rem;
-  /* margin-left: 5rem; */
   img {
     width: 241px;
   }

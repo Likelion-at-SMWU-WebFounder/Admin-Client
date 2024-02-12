@@ -3,7 +3,6 @@ import styled from "styled-components";
 
 const StyledInput = styled.input`
   position: relative;
-  /* margin-left: 10px; */
   -moz-appearance: none;
   -webkit-appearance: none;
   appearance: none;
@@ -23,9 +22,9 @@ const StyledInput = styled.input`
     background-color: #eb9537;
 
     &::before {
-      content: "✔"; /* 표시할 내용 (체크 표시) */
-      font-size: 14px; /* 표시할 내용의 크기 조절 */
-      color: black; /* 표시할 내용의 색상 */
+      content: "✔";
+      font-size: 14px;
+      color: black;
       position: absolute;
       top: 50%;
       left: 50%;
@@ -36,7 +35,6 @@ const StyledInput = styled.input`
 
 const Table = styled.div`
   display: table;
-  /* flex-direction: column; */
   width: 100%;
   border-collapse: collapse;
 `;
@@ -55,9 +53,6 @@ const ContentTitle = styled.div`
   line-height: normal;
   letter-spacing: -1.263px;
   display: table-row;
-  /* flex-direction: row; */
-  /* justify-content: space-between; */
-  /* flex: 1; */
 `;
 
 const TableCell = styled.div`
@@ -70,8 +65,6 @@ const Cell = styled.div`
   display: table-cell;
   padding: 8px;
   white-space: nowrap;
-  /* border: 1px solid white; */
-  /* flex-direction: column; */
 `;
 
 const Button = styled.button`
@@ -81,9 +74,7 @@ const Button = styled.button`
   background: #d9d9d9;
   width: 139px;
   height: 31px;
-  /* align-items: center; */
   flex-shrink: 0;
-  /* margin: 2px; */
   color: #111;
   text-align: center;
   font-size: 20px;
@@ -94,9 +85,6 @@ const Button = styled.button`
 `;
 
 const Content = styled.div`
-  /* display: flex;
-  flex-direction: row; */
-  /* justify-content: space-between; */
   display: table-row;
   align-items: center;
   border-bottom: 1px solid white;
@@ -105,14 +93,11 @@ const Content = styled.div`
   font-weight: 400;
   line-height: normal;
   letter-spacing: -1.263px;
-  /* margin-bottom: 10px; */
 `;
 
 const ImageWrap = styled.div``;
 
 const Posts = ({ list, checkedItems, setCheckedItems }) => {
-  console.log("list", list);
-  // 전체 체크
   const onCheckBoxAll = (e) => {
     if (e.target.checked) {
       const checkedListArr = [];
@@ -123,9 +108,6 @@ const Posts = ({ list, checkedItems, setCheckedItems }) => {
     }
   };
 
-  // 개별 체크
-  // 체크된 아이템의 아이디를 배열 형태로 관리
-  // 체크가 false이면 해당 item의 id가 아닌 것들만 담음.
   const onChangeCheckBox = (e, item) => {
     const isChecked = e.target.checked;
     setCheckedItems((prevCheckedItems) => {

@@ -20,7 +20,6 @@ function App() {
       <Router>
         <Routes>
           <Route path="/sooklion-admin/login" element={<LoginPage />} />
-          {/* <Route element={<Navbar />}> */}
           <Route path="/sooklion-admin" element={<HomePage />} />
           <Route
             path="/sooklion-admin/apply"

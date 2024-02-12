@@ -71,7 +71,6 @@ const DocumentItemsEditPage = () => {
   const fetchQuestions = async () => {
     try {
       const data = await apiModule.fetchQuestions();
-      console.log("data", data);
       setQuestions(data);
       setLoading(false);
     } catch (err) {
@@ -82,7 +81,6 @@ const DocumentItemsEditPage = () => {
   const editQuestions = async (questionsData) => {
     try {
       const response = await apiModule.updateQuestions(questionsData);
-      console.log(response.data);
       alert("수정된 문항이 정상적으로 반영되었습니다.");
       navigate("/sooklion-admin/document");
     } catch (error) {
@@ -176,7 +174,6 @@ const DocumentItemsEditPage = () => {
             <S.ButtonSet>
               <SaveButton
                 onClick={() => {
-                  console.log("questions", questions.flat());
                   editQuestions(questions.flat());
                 }}
               >

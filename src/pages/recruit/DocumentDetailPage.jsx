@@ -4,8 +4,6 @@ import styled from "styled-components";
 import apiModule from "../../api/apiModule";
 import Form from "../../components/Form";
 import Question from "../../components/Question";
-// import html2canvas from "html2canvas";
-// import jsPDF from "jspdf";
 
 const DocumentDetailPage = () => {
   const { joinerId } = useParams();
@@ -16,7 +14,6 @@ const DocumentDetailPage = () => {
       try {
         const data = await apiModule.fetchDocumentDetail(joinerId);
         setDocumentData(data);
-        console.log(data);
       } catch (error) {
         console.error(error);
       }

@@ -14,7 +14,6 @@ const apiModule = {
         )
       );
       const data = responses.map((response) => response.data.result);
-      console.log("data", data);
       return data;
     } catch (err) {
       throw new Error(err);
@@ -25,7 +24,6 @@ const apiModule = {
     const url = "/api/manage/docs/add";
     try {
       const response = await axiosInstance.post(url, { joinerIds });
-      console.log(response.data);
       return response.data;
     } catch (err) {
       throw new Error(err);
@@ -77,7 +75,6 @@ const apiModule = {
     const url = "/api/manage/interview/add";
     try {
       const response = await axiosInstance.post(url, { joinerIds });
-      console.log(response.data);
       return response.data;
     } catch (err) {
       throw new Error(err);
@@ -90,7 +87,6 @@ const apiModule = {
 
     try {
       await axiosInstance.delete(url, { data });
-      console.log("면접 삭제 성공", data);
       return true;
     } catch (err) {
       console.error(err);
@@ -121,7 +117,6 @@ const apiModule = {
 
     try {
       const response = await axiosInstance.post(url, data);
-      console.log(response.data);
       return response.data;
     } catch (err) {
       throw new Error(err);
@@ -152,7 +147,6 @@ const apiModule = {
     const url = `/api/manage/interviewtime/${joinerId}`;
     try {
       const response = await axiosInstance.get(url);
-      console.log(response.data.result);
       return response.data.result;
     } catch (err) {
       throw new Error(err);

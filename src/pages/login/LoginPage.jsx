@@ -105,8 +105,6 @@ const LoginPage = () => {
         secure: true,
       });
 
-      console.log(response.data.result.accessToken);
-      console.log(response);
       navigate("/sooklion-admin");
     } catch (err) {
       console.error(err);

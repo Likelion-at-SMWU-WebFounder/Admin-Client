@@ -4,9 +4,7 @@ import styled from "styled-components";
 
 const Question = ({ documentData }) => {
   const [questions, setQuestions] = useState([]);
-  // const [trackQuestions, setTrackQuestions] = useState([]);
   const [loading, setLoading] = useState(true);
-  console.log("answer", documentData);
 
   useEffect(() => {
     const fetchDocuments = async () => {
@@ -37,14 +35,12 @@ const Question = ({ documentData }) => {
         setLoading(false);
       }
     };
-    console.log("questions", questions);
     fetchDocuments();
   }, [documentData]);
 
   if (loading) {
     return <div>Loading...</div>;
   }
-  console.log("questions", questions);
 
   return (
     <>
@@ -81,17 +77,6 @@ const Question = ({ documentData }) => {
         ))} */}
       </>
 
-      {/* <QuestionContainer>
-        <Text fontSize="18px" marginTop="30px" marginLeft="30px">
-          기술블로그, 포트폴리오, GitHub 등 자유롭게 URL 형식으로 제출해주세요.
-          *선택
-        </Text>
-        <Textarea>
-          {documentData.answerList &&
-            documentData.answerList[documentData.answerList.length - 1]}
-        </Textarea>
-      </QuestionContainer> */}
-
       <QuestionContainer>
         <Text fontSize="18px" marginTop="30px" marginLeft="30px">
           면접 가능 시간
@@ -109,13 +94,6 @@ const Question = ({ documentData }) => {
 };
 
 export default Question;
-
-const Hr = styled.hr`
-  border: 1px solid #ffffff;
-  margin-top: ${(props) => props.marginTop};
-  margin-bottom: ${(props) => props.marginBottom};
-  width: 1100px;
-`;
 
 const Text = styled.div`
   width: 1000px;

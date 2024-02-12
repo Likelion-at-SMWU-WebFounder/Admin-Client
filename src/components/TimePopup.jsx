@@ -47,7 +47,6 @@ const UlDiv = styled.ul`
 `;
 
 const Ul = styled.ul`
-  /* margin-top: 30px; */
   margin-left: 30px;
   max-height: 50%;
 `;
@@ -111,8 +110,6 @@ const TimePopup = ({ track, aname, joinerId, onClose }) => {
   const [selectedInterview, setSelectedInterview] = useState([]);
 
   const handleSave = async () => {
-    console.log(selectedDate);
-    console.log(selectedTime);
     try {
       await apiModule.saveInterviewTime({
         interviewDate: selectedDate,
@@ -122,29 +119,24 @@ const TimePopup = ({ track, aname, joinerId, onClose }) => {
       onClose();
       window.location.reload();
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
 
   useEffect(() => {
     const fetchInterviewTime = async () => {
-      console.log("joinerId", joinerId);
       try {
         if (joinerId) {
-          // joinerId가 유효한 경우에만 실행
           const data = await apiModule.fetchInterviewTime(joinerId);
           setSelectedInterview(data);
-          console.log(data);
         }
       } catch (err) {
-        console.log(err);
+        console.error(err);
       }
     };
 
-    fetchInterviewTime(); // 이 부분에서 joinerId가 변경되지 않도록 설정
+    fetchInterviewTime();
   }, []);
-  console.log(aname);
-  console.log(track);
 
   return (
     <PopupOverlay>

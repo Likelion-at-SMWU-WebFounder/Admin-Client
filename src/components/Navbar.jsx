@@ -9,8 +9,6 @@ const MainLayout = styled.div`
 `;
 
 const NavLayout = styled.div`
-  /* position: sticky; */
-  /* top: 0; */
   display: flex;
   flex-direction: column;
   min-width: 261px;
