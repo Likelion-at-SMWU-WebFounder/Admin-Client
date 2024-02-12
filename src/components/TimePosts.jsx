@@ -117,16 +117,9 @@ const TimePosts = ({
   showPopup,
   setShowPopup,
 }) => {
-  const [interviewTimes, setInterviewTimes] = useState({});
   const [selectedItemId, setSelectedItemId] = useState(null);
 
   // TODO : 면접 시간 단순 get
-  const saveInterviewTime = (joinerId, date, time) => {
-    setInterviewTimes((prevTimes) => ({
-      ...prevTimes,
-      [joinerId]: { date, time }, // joinerId를 키로 사용하여 각 아이템의 면접 시간을 저장
-    }));
-  };
 
   const onCheckBoxAll = (e) => {
     if (e.target.checked) {
@@ -192,9 +185,6 @@ const TimePosts = ({
                   aname={data.name}
                   joinerId={data.joinerId}
                   onClose={() => setShowPopup(false)}
-                  onSave={(date, time) => {
-                    saveInterviewTime(data.joinerId, date, time);
-                  }}
                 />
               )}
               <Button

@@ -105,7 +105,7 @@ const SaveButton = styled.button`
   box-sizing: content-box;
 `;
 
-const TimePopup = ({ track, aname, joinerId, onClose, onSave }) => {
+const TimePopup = ({ track, aname, joinerId, onClose }) => {
   const [selectedDate, setSelectedDate] = useState("");
   const [selectedTime, setSelectedTime] = useState("");
   const [selectedInterview, setSelectedInterview] = useState([]);
@@ -119,8 +119,8 @@ const TimePopup = ({ track, aname, joinerId, onClose, onSave }) => {
         interviewTime: selectedTime,
         joinerId: joinerId,
       });
-      onSave(selectedDate, selectedTime);
       onClose();
+      window.location.reload();
     } catch (err) {
       console.log(err);
     }
