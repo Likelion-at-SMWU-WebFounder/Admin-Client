@@ -191,6 +191,17 @@ const DocumentItemsPage = () => {
         <S.Container>
           <S.Title>서류 문항 관리</S.Title>
           <S.About>지원 서류 문항을 관리합니다.</S.About>
+          <S.ButtonContainer>
+            <S.ButtonSet>
+              <EditButton
+                onClick={() => {
+                  navigate("/sooklion-admin/editdocument");
+                }}
+              >
+                수정
+              </EditButton>
+            </S.ButtonSet>
+          </S.ButtonContainer>
           <S.RowDiv>
             <S.Title>공통 문항</S.Title>
           </S.RowDiv>
@@ -284,21 +295,6 @@ const DocumentItemsPage = () => {
               </QuestionContainer>
             ))}
           </>
-          <Div></Div>
-          <Div></Div>
-          <Div></Div>
-          <Div></Div>
-          <S.ButtonContainer>
-            <S.ButtonSet>
-              <EditButton
-                onClick={() => {
-                  navigate("/sooklion-admin/editdocument");
-                }}
-              >
-                수정
-              </EditButton>
-            </S.ButtonSet>
-          </S.ButtonContainer>
         </S.Container>
       </S.Layout>
     </>
