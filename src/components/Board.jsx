@@ -53,23 +53,6 @@ const customStyles = {
   }),
 };
 
-const ResetButton = styled.button`
-  border: none;
-  margin-right: 20px;
-  border-radius: 5px;
-  background: #f4a6a6;
-  width: 197px;
-  height: 56px;
-  flex-shrink: 0;
-  color: #000;
-  text-align: center;
-  font-size: 28px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-  letter-spacing: -1.414px;
-`;
-
 const AddButton = styled.button`
   border: none;
   margin-right: 20px;
@@ -179,15 +162,6 @@ const Board = ({ pass, type, checking, onAdd, onDelete }) => {
       time: "2024-03-25 04:24:43",
     });
   }
-
-  // 관리자 지원현황 및 서류 get
-  // 서류 확인 버튼 누르면 해당 id 이동
-
-  // 서류 합격자 전제 조회 get
-
-  // 면접 최종 합격자 전체 조회 get
-
-  // get 해오고 postsData로 전달
 
   const tracks = [
     { value: "all", label: "전체트랙" },

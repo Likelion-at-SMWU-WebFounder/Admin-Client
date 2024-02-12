@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import styled from "styled-components";
 import * as S from "../../style/LayoutStyle";
 import Navbar from "../../components/Navbar";
@@ -84,6 +83,7 @@ const DocumentItemsEditPage = () => {
     try {
       const response = await apiModule.updateQuestions(questionsData);
       console.log(response.data);
+      alert("수정된 문항이 정상적으로 반영되었습니다.");
       navigate("/sooklion-admin/document");
     } catch (error) {
       console.error("error:", error);

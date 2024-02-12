@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import apiModule from "../../api/apiModule";
-import axios from "axios";
 import styled from "styled-components";
 import * as S from "../../style/LayoutStyle";
 import Navbar from "../../components/Navbar";
@@ -68,7 +67,6 @@ const ApplicationStatusPage = () => {
   };
   useEffect(() => {
     fetchDocsResult();
-    // console.log(docs);
   }, []);
 
   const previewLists = docs.map((item) => item.applicationDocumentPreviewList);

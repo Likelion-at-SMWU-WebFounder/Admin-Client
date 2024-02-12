@@ -1,5 +1,4 @@
 import axiosInstance from "./axiosInstance";
-import { getCookie } from "./cookie";
 
 const apiModule = {
   fetchFirstDocs: async () => {
@@ -130,12 +129,12 @@ const apiModule = {
   },
 
   deleteQuestion: async (id) => {
-    const url = `/api/manage/docs/quest/${id}`; 
+    const url = `/api/manage/docs/quest/${id}`;
     try {
       const response = await axiosInstance.delete(url);
-      return response.data; 
+      return response.data;
     } catch (err) {
-      throw new Error(err); 
+      throw new Error(err);
     }
   },
 

@@ -124,17 +124,16 @@ const DocumentItemsPage = () => {
     be: "",
   });
 
-  const fetchQuestions = async () => {
-    try {
-      const data = await apiModule.fetchQuestions();
-      setQuestions(data);
-      console.log(questions);
-    } catch (err) {
-      console.error("error:", err);
-    }
-  };
-
   useEffect(() => {
+    const fetchQuestions = async () => {
+      try {
+        const data = await apiModule.fetchQuestions();
+        setQuestions(data);
+      } catch (err) {
+        console.error("error:", err);
+      }
+    };
+
     fetchQuestions();
   }, []);
 
@@ -143,6 +142,14 @@ const DocumentItemsPage = () => {
       ...inputContents,
       [track]: event.target.value,
     });
+  };
+
+  const onSubmit = (track, idx) => {
+    if (window.confirm("작성한 문항을 추가하시겠습니까?")) {
+      handleSubmit(track, idx);
+      alert("문항이 추가되었습니다.");
+      window.location.reload();
+    }
   };
 
   const handleSubmit = async (track, idx) => {
@@ -154,16 +161,22 @@ const DocumentItemsPage = () => {
         content: inputContents[track],
         maxLength: 600,
       });
-      fetchQuestions();
     } catch (error) {
       console.error("error", error);
+    }
+  };
+
+  const onDelete = (id) => {
+    if (window.confirm("문항을 삭제하시겠습니까?")) {
+      handleDelete(id);
+      alert("문항이 삭제되었습니다.");
+      window.location.reload();
     }
   };
 
   const handleDelete = async (id) => {
     try {
       await apiModule.deleteQuestion(id);
-      fetchQuestions();
     } catch (error) {
       console.error("error", error);
     }
@@ -189,14 +202,14 @@ const DocumentItemsPage = () => {
                 placeholder="새로운 공통 문항을 입력하세요."
                 onChange={(e) => handleChange(e, "common")}
               />
-              <SaveButton onClick={() => handleSubmit("common", 0)}>
+              <SaveButton onClick={() => onSubmit("common", 0)}>
                 저장
               </SaveButton>
             </QuestionContainer>
             {questions[0]?.map((data) => (
               <QuestionContainer key={data.id}>
                 <QuestionDiv>{data.content}</QuestionDiv>
-                <DeleteButton onClick={() => handleDelete(data.id)}>
+                <DeleteButton onClick={() => onDelete(data.id)}>
                   삭제
                 </DeleteButton>
               </QuestionContainer>
@@ -214,14 +227,12 @@ const DocumentItemsPage = () => {
                 placeholder="새로운 기획 · 디자인 문항을 입력하세요."
                 onChange={(e) => handleChange(e, "pm")}
               />
-              <SaveButton onClick={() => handleSubmit("pm", 1)}>
-                저장
-              </SaveButton>
+              <SaveButton onClick={() => onSubmit("pm", 1)}>저장</SaveButton>
             </QuestionContainer>
             {questions[1]?.map((data) => (
               <QuestionContainer key={data.id}>
                 <QuestionDiv>{data.content}</QuestionDiv>
-                <DeleteButton onClick={() => handleDelete(data.id)}>
+                <DeleteButton onClick={() => onDelete(data.id)}>
                   삭제
                 </DeleteButton>
               </QuestionContainer>
@@ -239,14 +250,12 @@ const DocumentItemsPage = () => {
                 placeholder="새로운 프론트엔드 문항을 입력하세요."
                 onChange={(e) => handleChange(e, "fe")}
               />
-              <SaveButton onClick={() => handleSubmit("fe", 2)}>
-                저장
-              </SaveButton>
+              <SaveButton onClick={() => onSubmit("fe", 2)}>저장</SaveButton>
             </QuestionContainer>
             {questions[2]?.map((data) => (
               <QuestionContainer key={data.id}>
                 <QuestionDiv>{data.content}</QuestionDiv>
-                <DeleteButton onClick={() => handleDelete(data.id)}>
+                <DeleteButton onClick={() => onDelete(data.id)}>
                   삭제
                 </DeleteButton>
               </QuestionContainer>
@@ -264,14 +273,12 @@ const DocumentItemsPage = () => {
                 placeholder="새로운 백엔드 문항을 입력하세요."
                 onChange={(e) => handleChange(e, "be")}
               />
-              <SaveButton onClick={() => handleSubmit("be", 3)}>
-                저장
-              </SaveButton>
+              <SaveButton onClick={() => onSubmit("be", 3)}>저장</SaveButton>
             </QuestionContainer>
             {questions[3]?.map((data) => (
               <QuestionContainer key={data.id}>
                 <QuestionDiv>{data.content}</QuestionDiv>
-                <DeleteButton onClick={() => handleDelete(data.id)}>
+                <DeleteButton onClick={() => onDelete(data.id)}>
                   삭제
                 </DeleteButton>
               </QuestionContainer>
