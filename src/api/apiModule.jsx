@@ -175,7 +175,7 @@ const apiModule = {
       throw new Error(err);
     }
   },
-  initApplicant: async (joinerIds) => {
+  initApplicant: async () => {
     const url = "/api/manage/apply/docs";
     try {
       const response = await axiosInstance.delete(url);
