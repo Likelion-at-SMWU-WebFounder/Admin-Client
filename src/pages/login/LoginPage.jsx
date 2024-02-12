@@ -1,5 +1,8 @@
+import axios from "axios";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { setCookie } from "../../api/cookie";
 
 const LoginLayout = styled.div`
   display: flex;
@@ -71,8 +74,9 @@ const LoginButton = styled.button`
 
 // TODO : 관리자 로그인
 const LoginPage = () => {
+  const navigate = useNavigate();
   const [values, setValues] = useState({
-    user_id: "",
+    accountId: "",
     password: "",
   });
 
@@ -80,6 +84,30 @@ const LoginPage = () => {
     const { name, value } = event.target;
     setValues({ ...values, [name]: value });
   };
+
+  const postAdmin = async () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/api/admin/signin",
+        {
+          accountId: values.accountId,
+          password: values.password,
+        }
+      );
+
+      setCookie("accessToken", response.data.result.token, {
+        path: "/",
+        secure: true,
+      });
+
+      console.log(response.data.result.token);
+      console.log(response);
+      navigate("/sooklion-admin");
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
     <LoginLayout>
       <img
@@ -91,9 +119,9 @@ const LoginPage = () => {
         <Div>아이디</Div>
         <StyledInput
           type="id"
-          id="user_id"
-          name="user_id"
-          value={values.user_id}
+          id="accountId"
+          name="accountId"
+          value={values.accountId}
           onChange={handleChange}
         ></StyledInput>
       </InputWrapper>
@@ -107,7 +135,7 @@ const LoginPage = () => {
           onChange={handleChange}
         ></StyledInput>
       </InputWrapper>
-      <LoginButton>로그인</LoginButton>
+      <LoginButton onClick={postAdmin}>로그인</LoginButton>
     </LoginLayout>
   );
 };
