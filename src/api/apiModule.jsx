@@ -116,6 +116,29 @@ const apiModule = {
       throw new Error(err);
     }
   },
+
+  postQuestions: async (data) => {
+    const url = "/api/manage/docs/quest";
+
+    try {
+      const response = await axiosInstance.post(url, data);
+      console.log(response.data);
+      return response.data;
+    } catch (err) {
+      throw new Error(err);
+    }
+  },
+
+  deleteQuestion: async (id) => {
+    const url = `/api/manage/docs/quest/${id}`; 
+    try {
+      const response = await axiosInstance.delete(url);
+      return response.data; 
+    } catch (err) {
+      throw new Error(err); 
+    }
+  },
+
   fetchDocumentDetail: async (joinerId) => {
     const url = `/api/recruit/docs/${joinerId}`;
     try {

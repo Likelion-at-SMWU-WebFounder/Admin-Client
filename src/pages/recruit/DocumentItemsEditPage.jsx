@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import styled from "styled-components";
 import * as S from "../../style/LayoutStyle";
 import Navbar from "../../components/Navbar";
 import Logo from "../../components/Logo";
+import apiModule from "../../api/apiModule";
 
 const QuestionContainer = styled.div``;
 
@@ -32,19 +35,6 @@ const Div = styled.div`
   height: 40px;
 `;
 
-const ItemButton = styled.button`
-  border: none;
-  border-radius: 15px;
-  background-color: #d9d9d9;
-  width: 97px;
-  height: 24px;
-  margin-left: 10px;
-  font-size: 15px;
-  &:hover {
-    background-color: #afafaf;
-  }
-`;
-
 const SaveButton = styled.button`
   border: none;
   margin-right: 20px;
@@ -70,57 +60,45 @@ const VLine = styled.div`
 // TODO : 문항 수정
 
 const DocumentItemsEditPage = () => {
-  // const addQuestion = async () => {
-  //   const baseUrl = "http://localhost:8080/api/manage/docs/quest";
-  //   try {
-  //     await axios.post(baseUrl,{
+  const [questions, setQuestions] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  //     })
-  //   }
-  // };
+  const navigate = useNavigate();
 
-  const [commonItemCount, setCommonItemCount] = useState(3); // 초기 입력 수를 3으로 가정합니다.
-  const [designItemCount, setDesignItemCount] = useState(3);
-  const [frontendItemCount, setFrontendItemCount] = useState(3);
-  const [backendItemCount, setBackendItemCount] = useState(3);
+  useEffect(() => {
+    fetchQuestions();
+  }, []);
 
-  const handleAddQuestion = (section) => {
-    switch (section) {
-      case "common":
-        setCommonItemCount((prevCount) => prevCount + 1);
-        break;
-      case "design":
-        setDesignItemCount((prevCount) => prevCount + 1);
-        break;
-      case "frontend":
-        setFrontendItemCount((prevCount) => prevCount + 1);
-        break;
-      case "backend":
-        setBackendItemCount((prevCount) => prevCount + 1);
-        break;
-      default:
-        break;
+  const fetchQuestions = async () => {
+    try {
+      const data = await apiModule.fetchQuestions();
+      console.log("data", data);
+      setQuestions(data);
+      setLoading(false);
+    } catch (err) {
+      console.error("error:", err);
     }
   };
 
-  const handleRemoveQuestion = (section) => {
-    switch (section) {
-      case "common":
-        setCommonItemCount((prevCount) => Math.max(prevCount - 1, 1));
-        break;
-      case "design":
-        setDesignItemCount((prevCount) => Math.max(prevCount - 1, 1));
-        break;
-      case "frontend":
-        setFrontendItemCount((prevCount) => Math.max(prevCount - 1, 1));
-        break;
-      case "backend":
-        setBackendItemCount((prevCount) => Math.max(prevCount - 1, 1));
-        break;
-      default:
-        break;
+  const editQuestions = async (questionsData) => {
+    try {
+      const response = await apiModule.updateQuestions(questionsData);
+      console.log(response.data);
+      navigate("/sooklion-admin/document");
+    } catch (error) {
+      console.error("error:", error);
     }
   };
+
+  const handleQuestionChange = (sectionIndex, index, event) => {
+    const newQuestions = [...questions];
+    newQuestions[sectionIndex][index].content = event.target.value;
+    setQuestions(newQuestions);
+  };
+
+  if (loading || questions === null) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <>
@@ -133,82 +111,77 @@ const DocumentItemsEditPage = () => {
           <S.About>지원 서류 문항을 관리합니다.</S.About>
           <S.RowDiv>
             <S.Title>공통 문항</S.Title>
-            <ItemButton onClick={() => handleAddQuestion("common")}>
-              문항 추가 +
-            </ItemButton>
-            <ItemButton onClick={() => handleRemoveQuestion("common")}>
-              문항 제거 -
-            </ItemButton>
           </S.RowDiv>
           <QuestionContainer>
-            {[...Array(commonItemCount)].map((_, index) => (
+            {questions[0].map((question, index) => (
               <QuestionInput
                 key={index}
                 placeholder="문항 질문을 작성해주세요 ..."
-              ></QuestionInput>
+                value={question.content}
+                onChange={(event) => handleQuestionChange(0, index, event)}
+              />
             ))}
           </QuestionContainer>
+
           <Div></Div>
           <S.RowDiv>
             <S.Title>기획 · 디자인 트랙 문항</S.Title>
-            <ItemButton onClick={() => handleAddQuestion("design")}>
-              문항 추가 +
-            </ItemButton>
-            <ItemButton onClick={() => handleRemoveQuestion("design")}>
-              문항 제거 -
-            </ItemButton>
           </S.RowDiv>
           <QuestionContainer>
-            {[...Array(designItemCount)].map((_, index) => (
+            {questions[1].map((question, index) => (
               <QuestionInput
                 key={index}
                 placeholder="문항 질문을 작성해주세요 ..."
-              ></QuestionInput>
+                value={question.content}
+                onChange={(event) => handleQuestionChange(1, index, event)}
+              />
             ))}
           </QuestionContainer>
+
           <Div></Div>
           <S.RowDiv>
             <S.Title>프론트엔드 트랙 문항</S.Title>
-            <ItemButton onClick={() => handleAddQuestion("frontend")}>
-              문항 추가 +
-            </ItemButton>
-            <ItemButton onClick={() => handleRemoveQuestion("frontend")}>
-              문항 제거 -
-            </ItemButton>
           </S.RowDiv>
           <QuestionContainer>
-            {[...Array(frontendItemCount)].map((_, index) => (
+            {questions[2].map((question, index) => (
               <QuestionInput
                 key={index}
                 placeholder="문항 질문을 작성해주세요 ..."
-              ></QuestionInput>
+                value={question.content}
+                onChange={(event) => handleQuestionChange(2, index, event)}
+              />
             ))}
           </QuestionContainer>
+
           <Div></Div>
           <S.RowDiv>
             <S.Title>백엔드 트랙 문항</S.Title>
-            <ItemButton onClick={() => handleAddQuestion("backend")}>
-              문항 추가 +
-            </ItemButton>
-            <ItemButton onClick={() => handleRemoveQuestion("backend")}>
-              문항 제거 -
-            </ItemButton>
           </S.RowDiv>
           <QuestionContainer>
-            {[...Array(backendItemCount)].map((_, index) => (
+            {questions[3].map((question, index) => (
               <QuestionInput
                 key={index}
                 placeholder="문항 질문을 작성해주세요 ..."
-              ></QuestionInput>
+                value={question.content}
+                onChange={(event) => handleQuestionChange(3, index, event)}
+              />
             ))}
           </QuestionContainer>
+
           <Div></Div>
           <Div></Div>
           <Div></Div>
           <Div></Div>
           <S.ButtonContainer>
             <S.ButtonSet>
-              <SaveButton>저장</SaveButton>
+              <SaveButton
+                onClick={() => {
+                  console.log("questions", questions.flat());
+                  editQuestions(questions.flat());
+                }}
+              >
+                저장
+              </SaveButton>
             </S.ButtonSet>
           </S.ButtonContainer>
         </S.Container>

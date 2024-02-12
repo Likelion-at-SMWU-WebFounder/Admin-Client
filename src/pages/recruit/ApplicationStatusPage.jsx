@@ -55,9 +55,6 @@ const VLine = styled.div`
 
 const ApplicationStatusPage = () => {
   const [docs, setDocs] = useState([]);
-  const easeOutExpo = (t) => {
-    return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
-  };
 
   // TODO : 지원자 현황 조회
   const fetchDocsResult = async () => {
