@@ -101,6 +101,16 @@ const Navbar = () => {
                   최종 합격자 선정
                 </NavStyleLink>
               </NavItem>
+              <NavItem>
+                <NavStyleLink
+                  to="/sooklion-admin/init-applicant"
+                  className={({ isActive }) =>
+                    isActive ? "active" : undefined
+                  }
+                >
+                  지원자 정보 초기화
+                </NavStyleLink>
+              </NavItem>
             </NavList>
           </NavBox>
         </NavContainer>
