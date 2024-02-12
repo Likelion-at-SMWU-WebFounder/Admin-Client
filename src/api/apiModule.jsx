@@ -1,6 +1,27 @@
 import axiosInstance from "./axiosInstance";
+import { getCookie } from "./cookie";
 
 const apiModule = {
+  fetchFirstDocs: async () => {
+    const url = "/api/manage/apply";
+    const tracks = ["all", "pm", "fe", "be"];
+
+    try {
+      const responses = await Promise.all(
+        tracks.map((track) =>
+          axiosInstance.get(url, {
+            params: { track: track, page: 0, size: 200 },
+          })
+        )
+      );
+      const data = responses.map((response) => response.data.result);
+      console.log("data", data);
+      return data;
+    } catch (err) {
+      throw new Error(err);
+    }
+  },
+
   addToDocs: async (joinerIds) => {
     const url = "/api/manage/docs/add";
     try {
@@ -95,7 +116,6 @@ const apiModule = {
       throw new Error(err);
     }
   },
-
   fetchDocumentDetail: async (joinerId) => {
     const url = `/api/recruit/docs/${joinerId}`;
     try {
@@ -126,6 +146,15 @@ const apiModule = {
         joinerId,
       });
       return response.data;
+    } catch (err) {
+      throw new Error(err);
+    }
+  },
+  updateQuestions: async (questionsData) => {
+    const url = "/api/manage/docs/quests/";
+    try {
+      const response = await axiosInstance.put(url, questionsData);
+      return response;
     } catch (err) {
       throw new Error(err);
     }

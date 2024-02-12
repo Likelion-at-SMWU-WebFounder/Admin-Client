@@ -95,12 +95,17 @@ const LoginPage = () => {
         }
       );
 
-      setCookie("accessToken", response.data.result.token, {
+      setCookie("accessToken", response.data.result.accessToken, {
         path: "/",
         secure: true,
       });
 
-      console.log(response.data.result.token);
+      setCookie("refreshToken", response.data.result.refreshToken, {
+        path: "/",
+        secure: true,
+      });
+
+      console.log(response.data.result.accessToken);
       console.log(response);
       navigate("/sooklion-admin");
     } catch (err) {
