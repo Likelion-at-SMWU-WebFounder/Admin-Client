@@ -12,6 +12,7 @@ import DocumentItemsEditPage from "./pages/recruit/DocumentItemsEditPage";
 import DocumentDetailPage from "./pages/recruit/DocumentDetailPage";
 import InterviewTimePage from "./pages/recruit/InterviewTimePage";
 import PassFinalPage from "./pages/recruit/PassFinalPage";
+import InitApplicantPage from "./pages/recruit/InitApplicantPage";
 
 function App() {
   return (
@@ -49,6 +50,10 @@ function App() {
           <Route
             path="/sooklion-admin/pass-final"
             element={<PassFinalPage />}
+          />
+          <Route
+            path="/sooklion-admin/init-applicant"
+            element={<InitApplicantPage />}
           />
         </Routes>
       </Router>
