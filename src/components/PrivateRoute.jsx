@@ -4,7 +4,7 @@ import isLogin from "../utils/isLogin";
 
 const PrivateRoute = ({ children }) => {
   const authed = isLogin();
-  return authed ? children : <Navigate to="/login" />;
+  return authed ? children : <Navigate to="/" />;
 };
 
 export default PrivateRoute;
