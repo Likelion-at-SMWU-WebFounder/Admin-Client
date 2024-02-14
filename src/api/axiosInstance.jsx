@@ -1,7 +1,7 @@
 import axios from "axios";
 import { getCookie, setCookie, removeCookie } from "./cookie";
 
-const baseUrl = "http://localhost:8080";
+const baseUrl = process.env.REACT_APP_HOST;
 
 const axiosInstance = axios.create({
   baseURL: baseUrl,
@@ -36,7 +36,7 @@ axiosInstance.interceptors.response.use(
           return Promise.reject(error);
         }
         const refreshResponse = await axios.post(
-          "http://localhost:8080/api/admin/reissue",
+          `${process.env.REACT_APP_HOST}/api/admin/reissue`,
           null,
           {
             params: {

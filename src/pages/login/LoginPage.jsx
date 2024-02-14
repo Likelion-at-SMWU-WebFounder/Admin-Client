@@ -88,7 +88,7 @@ const LoginPage = () => {
   const postAdmin = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:8080/api/admin/signin",
+        `${process.env.REACT_APP_HOST}/api/admin/signin`,
         {
           accountId: values.accountId,
           password: values.password,

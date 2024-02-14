@@ -76,7 +76,6 @@ const SaveButton = styled.button`
 
 const EditButton = styled.button`
   border: none;
-  margin-right: 40px;
   border-radius: 5px;
   background: #8891e0;
   width: 150px;
@@ -107,6 +106,11 @@ const DeleteButton = styled.button`
   letter-spacing: -1.414px;
   margin-left: 20px;
   margin-bottom: 30px;
+`;
+
+const ButtonSet = styled.div`
+  display: flex;
+  margin-left: 800px;
 `;
 
 const VLine = styled.div`
@@ -191,17 +195,15 @@ const DocumentItemsPage = () => {
         <S.Container>
           <S.Title>서류 문항 관리</S.Title>
           <S.About>지원 서류 문항을 관리합니다.</S.About>
-          <S.ButtonContainer>
-            <S.ButtonSet>
-              <EditButton
-                onClick={() => {
-                  navigate("/sooklion-admin/editdocument");
-                }}
-              >
-                수정
-              </EditButton>
-            </S.ButtonSet>
-          </S.ButtonContainer>
+          <ButtonSet>
+            <EditButton
+              onClick={() => {
+                navigate("/sooklion-admin/editdocument");
+              }}
+            >
+              수정
+            </EditButton>
+          </ButtonSet>
           <S.RowDiv>
             <S.Title>공통 문항</S.Title>
           </S.RowDiv>
