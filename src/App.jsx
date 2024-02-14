@@ -22,9 +22,9 @@ function App() {
       <GlobalStyle />
       <Router basename="/sooklion-admin">
         <Routes>
-          <Route path="/" element={<LoginPage />} />
+          <Route path="/login" element={<LoginPage />} />
           <Route
-            path="/home"
+            path="/"
             element={
               <PrivateRoute>
                 <HomePage />

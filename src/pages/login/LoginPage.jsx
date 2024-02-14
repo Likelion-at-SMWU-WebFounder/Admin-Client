@@ -111,7 +111,7 @@ const LoginPage = () => {
         path: "/",
         secure: true,
       });
-      navigate("/home");
+      navigate("/");
     } catch (err) {
       console.error(err);
       alert("아이디와 비밀번호를 확인해주세요.");
