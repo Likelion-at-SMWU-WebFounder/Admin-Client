@@ -127,19 +127,21 @@ const DocumentItemsPage = () => {
     fe: "",
     be: "",
   });
+  const [updateFlag, setUpdateFlag] = useState(false);
+
+  const fetchDataAndUpdateQuestions = async () => {
+    try {
+      const data = await apiModule.fetchQuestions();
+      setUpdateFlag(false);
+      setQuestions(data);
+    } catch (err) {
+      console.error("error:", err);
+    }
+  };
 
   useEffect(() => {
-    const fetchQuestions = async () => {
-      try {
-        const data = await apiModule.fetchQuestions();
-        setQuestions(data);
-      } catch (err) {
-        console.error("error:", err);
-      }
-    };
-
-    fetchQuestions();
-  }, []);
+    fetchDataAndUpdateQuestions();
+  }, [updateFlag]);
 
   const handleChange = (event, track) => {
     setInputContents({
@@ -152,7 +154,6 @@ const DocumentItemsPage = () => {
     if (window.confirm("작성한 문항을 추가하시겠습니까?")) {
       handleSubmit(track, idx);
       alert("문항이 추가되었습니다.");
-      window.location.reload();
     }
   };
 
@@ -165,6 +166,8 @@ const DocumentItemsPage = () => {
         content: inputContents[track],
         maxLength: 600,
       });
+      setUpdateFlag(true);
+      setInputContents({ ...inputContents, [track]: "" });
     } catch (error) {
       console.error("error", error);
     }
@@ -174,13 +177,13 @@ const DocumentItemsPage = () => {
     if (window.confirm("문항을 삭제하시겠습니까?")) {
       handleDelete(id);
       alert("문항이 삭제되었습니다.");
-      window.location.reload();
     }
   };
 
   const handleDelete = async (id) => {
     try {
       await apiModule.deleteQuestion(id);
+      setUpdateFlag(true);
     } catch (error) {
       console.error("error", error);
     }

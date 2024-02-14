@@ -111,7 +111,7 @@ const DocumentItemsEditPage = () => {
             <S.Title>공통 문항</S.Title>
           </S.RowDiv>
           <QuestionContainer>
-            {questions[0].map((question, index) => (
+            {questions[0]?.map((question, index) => (
               <QuestionInput
                 key={index}
                 placeholder="문항 질문을 작성해주세요 ..."
@@ -126,7 +126,7 @@ const DocumentItemsEditPage = () => {
             <S.Title>기획 · 디자인 트랙 문항</S.Title>
           </S.RowDiv>
           <QuestionContainer>
-            {questions[1].map((question, index) => (
+            {questions[1]?.map((question, index) => (
               <QuestionInput
                 key={index}
                 placeholder="문항 질문을 작성해주세요 ..."
@@ -141,7 +141,7 @@ const DocumentItemsEditPage = () => {
             <S.Title>프론트엔드 트랙 문항</S.Title>
           </S.RowDiv>
           <QuestionContainer>
-            {questions[2].map((question, index) => (
+            {questions[2]?.map((question, index) => (
               <QuestionInput
                 key={index}
                 placeholder="문항 질문을 작성해주세요 ..."
@@ -156,7 +156,7 @@ const DocumentItemsEditPage = () => {
             <S.Title>백엔드 트랙 문항</S.Title>
           </S.RowDiv>
           <QuestionContainer>
-            {questions[3].map((question, index) => (
+            {questions[3]?.map((question, index) => (
               <QuestionInput
                 key={index}
                 placeholder="문항 질문을 작성해주세요 ..."
