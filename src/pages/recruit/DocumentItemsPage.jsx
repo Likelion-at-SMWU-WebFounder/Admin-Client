@@ -201,7 +201,7 @@ const DocumentItemsPage = () => {
           <ButtonSet>
             <EditButton
               onClick={() => {
-                navigate("/sooklion-admin/editdocument");
+                navigate("/editdocument");
               }}
             >
               수정

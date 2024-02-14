@@ -51,7 +51,7 @@ const Navbar = () => {
             <NavList>
               <NavItem>
                 <NavStyleLink
-                  to="/sooklion-admin/apply"
+                  to="/apply"
                   className={({ isActive }) =>
                     isActive ? "active" : undefined
                   }
@@ -61,7 +61,7 @@ const Navbar = () => {
               </NavItem>
               <NavItem>
                 <NavStyleLink
-                  to="/sooklion-admin/pass"
+                  to="/pass"
                   className={({ isActive }) =>
                     isActive ? "active" : undefined
                   }
@@ -71,7 +71,7 @@ const Navbar = () => {
               </NavItem>
               <NavItem>
                 <NavStyleLink
-                  to="/sooklion-admin/document"
+                  to="/document"
                   className={({ isActive }) =>
                     isActive ? "active" : undefined
                   }
@@ -81,7 +81,7 @@ const Navbar = () => {
               </NavItem>
               <NavItem>
                 <NavStyleLink
-                  to="/sooklion-admin/interview"
+                  to="/interview"
                   className={({ isActive }) =>
                     isActive ? "active" : undefined
                   }
@@ -91,7 +91,7 @@ const Navbar = () => {
               </NavItem>
               <NavItem>
                 <NavStyleLink
-                  to="/sooklion-admin/pass-final"
+                  to="/pass-final"
                   className={({ isActive }) =>
                     isActive ? "active" : undefined
                   }
@@ -101,7 +101,7 @@ const Navbar = () => {
               </NavItem>
               <NavItem>
                 <NavStyleLink
-                  to="/sooklion-admin/init-applicant"
+                  to="/init-applicant"
                   className={({ isActive }) =>
                     isActive ? "active" : undefined
                   }

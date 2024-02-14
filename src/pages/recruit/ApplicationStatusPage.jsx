@@ -55,7 +55,6 @@ const VLine = styled.div`
 const ApplicationStatusPage = () => {
   const [docs, setDocs] = useState([]);
 
-  // TODO : 지원자 현황 조회
   const fetchDocsResult = async () => {
     try {
       const data = await apiModule.fetchFirstDocs();

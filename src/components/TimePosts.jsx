@@ -96,7 +96,6 @@ const Content = styled.div`
 
 const ImageWrap = styled.div``;
 
-// TODO : 면접 시간
 const TimePosts = ({
   list,
   checkedItems,
@@ -105,8 +104,6 @@ const TimePosts = ({
   setShowPopup,
 }) => {
   const [selectedItemId, setSelectedItemId] = useState(null);
-
-  // TODO : 면접 시간 단순 get
 
   const onCheckBoxAll = (e) => {
     if (e.target.checked) {

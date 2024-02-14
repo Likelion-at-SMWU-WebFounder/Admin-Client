@@ -56,8 +56,6 @@ const VLine = styled.div`
   min-height: 100vh;
 `;
 
-// TODO : 문항 수정
-
 const DocumentItemsEditPage = () => {
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -80,9 +78,9 @@ const DocumentItemsEditPage = () => {
 
   const editQuestions = async (questionsData) => {
     try {
-      const response = await apiModule.updateQuestions(questionsData);
+      await apiModule.updateQuestions(questionsData);
       alert("수정된 문항이 정상적으로 반영되었습니다.");
-      navigate("/sooklion-admin/document");
+      navigate("/document");
     } catch (error) {
       console.error("error:", error);
     }

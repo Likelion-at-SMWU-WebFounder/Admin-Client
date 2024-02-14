@@ -1,3 +1,4 @@
+import React from "react";
 import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
 import "./App.css";
 import HomePage from "./pages/home/HomePage";
@@ -13,46 +14,86 @@ import DocumentDetailPage from "./pages/recruit/DocumentDetailPage";
 import InterviewTimePage from "./pages/recruit/InterviewTimePage";
 import PassFinalPage from "./pages/recruit/PassFinalPage";
 import InitApplicantPage from "./pages/recruit/InitApplicantPage";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <Router>
+      <Router basename="/sooklion-admin">
         <Routes>
-          <Route path="/sooklion-admin/login" element={<LoginPage />} />
-          <Route path="/sooklion-admin" element={<HomePage />} />
+          <Route path="/login" element={<LoginPage />} />
           <Route
-            path="/sooklion-admin/apply"
-            element={<ApplicationStatusPage />}
+            path="/home"
+            element={
+              <PrivateRoute>
+                <HomePage />
+              </PrivateRoute>
+            }
           />
           <Route
-            path="/sooklion-admin/pass"
-            element={<PassedApplicantsPage />}
+            path="/apply"
+            element={
+              <PrivateRoute>
+                <ApplicationStatusPage />
+              </PrivateRoute>
+            }
           />
           <Route
-            path="/sooklion-admin/document"
-            element={<DocumentItemsPage />}
+            path="/pass"
+            element={
+              <PrivateRoute>
+                <PassedApplicantsPage />
+              </PrivateRoute>
+            }
           />
           <Route
-            path="/sooklion-admin/editdocument"
-            element={<DocumentItemsEditPage />}
+            path="/document"
+            element={
+              <PrivateRoute>
+                <DocumentItemsPage />
+              </PrivateRoute>
+            }
           />
           <Route
-            path="/sooklion-admin/apply/:joinerId"
-            element={<DocumentDetailPage />}
+            path="/editdocument"
+            element={
+              <PrivateRoute>
+                <DocumentItemsEditPage />
+              </PrivateRoute>
+            }
           />
           <Route
-            path="/sooklion-admin/interview"
-            element={<InterviewTimePage />}
+            path="/apply/:joinerId"
+            element={
+              <PrivateRoute>
+                <DocumentDetailPage />
+              </PrivateRoute>
+            }
           />
           <Route
-            path="/sooklion-admin/pass-final"
-            element={<PassFinalPage />}
+            path="/interview"
+            element={
+              <PrivateRoute>
+                <InterviewTimePage />
+              </PrivateRoute>
+            }
           />
           <Route
-            path="/sooklion-admin/init-applicant"
-            element={<InitApplicantPage />}
+            path="/pass-final"
+            element={
+              <PrivateRoute>
+                <PassFinalPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/init-applicant"
+            element={
+              <PrivateRoute>
+                <InitApplicantPage />
+              </PrivateRoute>
+            }
           />
         </Routes>
       </Router>

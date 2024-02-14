@@ -17,6 +17,14 @@ const LoginLayout = styled.div`
   }
 `;
 
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+`;
+
 const InputWrapper = styled.div`
   display: flex;
   flex-direction: row;
@@ -72,7 +80,6 @@ const LoginButton = styled.button`
   letter-spacing: -1.263px;
 `;
 
-// TODO : 관리자 로그인
 const LoginPage = () => {
   const navigate = useNavigate();
   const [values, setValues] = useState({
@@ -104,11 +111,16 @@ const LoginPage = () => {
         path: "/",
         secure: true,
       });
-
-      navigate("/sooklion-admin");
+      navigate("/home");
     } catch (err) {
       console.error(err);
+      alert("아이디와 비밀번호를 확인해주세요.");
     }
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    postAdmin();
   };
 
   return (
@@ -118,27 +130,30 @@ const LoginPage = () => {
         alt="Logo"
         className="logo"
       />
-      <InputWrapper>
-        <Div>아이디</Div>
-        <StyledInput
-          type="id"
-          id="accountId"
-          name="accountId"
-          value={values.accountId}
-          onChange={handleChange}
-        ></StyledInput>
-      </InputWrapper>
-      <InputWrapper>
-        <Div>비밀번호</Div>
-        <StyledInput
-          type="password"
-          id="password"
-          name="password"
-          value={values.password}
-          onChange={handleChange}
-        ></StyledInput>
-      </InputWrapper>
-      <LoginButton onClick={postAdmin}>로그인</LoginButton>
+      <Form onSubmit={handleSubmit}>
+        <InputWrapper>
+          <Div>아이디</Div>
+          <StyledInput
+            type="id"
+            id="accountId"
+            name="accountId"
+            value={values.accountId}
+            onChange={handleChange}
+          ></StyledInput>
+        </InputWrapper>
+        <InputWrapper>
+          <Div>비밀번호</Div>
+          <StyledInput
+            type="password"
+            id="password"
+            name="password"
+            value={values.password}
+            onChange={handleChange}
+            autoComplete="off"
+          ></StyledInput>
+        </InputWrapper>
+        <LoginButton type="submit">로그인</LoginButton>
+      </Form>
     </LoginLayout>
   );
 };
