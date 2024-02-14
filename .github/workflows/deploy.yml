@@ -10,6 +10,9 @@ jobs:
       - name: Checkout source code. # Repo checkout
         uses: actions/checkout@v2
 
+      - name: .env setting
+        run: echo "REACT_APP_HOST=${{ secrets.REACT_APP_HOST }}" >> .env.production
+
       - name: Check Node v # Node v 확인
         run: node -v
 
