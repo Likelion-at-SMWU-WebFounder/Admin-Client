@@ -104,12 +104,16 @@ const TimePosts = ({
   setShowPopup,
 }) => {
   const [selectedItemId, setSelectedItemId] = useState(null);
+  const [isAllChecked, setIsAllChecked] = useState(false);
+
+  useEffect(() => {
+    setIsAllChecked(list.length > 0 && checkedItems.length === list.length);
+  }, [checkedItems, list]);
 
   const onCheckBoxAll = (e) => {
-    if (e.target.checked) {
-      const checkedListArr = [];
-      list.forEach((item) => checkedListArr.push(item.joinerId));
-      setCheckedItems(checkedListArr);
+    if (!isAllChecked) {
+      const allItems = list.map((item) => item.joinerId);
+      setCheckedItems(allItems);
     } else {
       setCheckedItems([]);
     }
@@ -131,7 +135,11 @@ const TimePosts = ({
       <ContentWrap>
         <ContentTitle>
           <TableCell>
-            <StyledInput type="checkbox" onChange={(e) => onCheckBoxAll(e)} />
+            <StyledInput
+              type="checkbox"
+              onChange={onCheckBoxAll}
+              checked={isAllChecked}
+            />
           </TableCell>
           <TableCell>번호</TableCell>
           <TableCell>이름</TableCell>
