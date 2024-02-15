@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { setCookie } from "../../api/cookie";
+import { getCookie, setCookie } from "../../api/cookie";
 
 const LoginLayout = styled.div`
   display: flex;
@@ -109,7 +109,7 @@ const LoginPage = () => {
       setCookie("refreshToken", response.data.result.refreshToken, {
         path: "/",
       });
-
+      console.log(getCookie("accessToken"));
       navigate("/");
     } catch (err) {
       console.error(err);
