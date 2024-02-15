@@ -52,11 +52,9 @@ axiosInstance.interceptors.response.use(
         const newAccessToken = refreshResponse.data.result.accessToken;
         setCookie("accessToken", newAccessToken, {
           path: "/",
-          secure: true,
         });
         setCookie("refreshToken", refreshResponse.data.result.refreshToken, {
           path: "/",
-          secure: true,
         });
 
         error.config.headers.Authorization = `Bearer ${newAccessToken}`;
