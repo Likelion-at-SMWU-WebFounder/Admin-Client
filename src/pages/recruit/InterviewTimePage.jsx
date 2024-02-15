@@ -37,7 +37,7 @@ const InterviewTimePage = () => {
   const deleteDocsResult = async (checkedItems) => {
     try {
       await apiModule.deleteDocsResult(checkedItems);
-      fetchData();
+      await fetchData();
     } catch (error) {
       console.error("error:", error);
     }

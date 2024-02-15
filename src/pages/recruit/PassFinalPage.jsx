@@ -30,7 +30,7 @@ const PassFinalPage = () => {
   const deleteInterview = async (checkedItems) => {
     try {
       await apiModule.deleteInterview(checkedItems);
-      fetchDocsResult();
+      await fetchDocsResult();
     } catch (err) {
       console.error("err", err);
     }

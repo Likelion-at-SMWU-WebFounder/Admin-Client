@@ -70,6 +70,10 @@ const ApplicationStatusPage = () => {
   const previewLists = docs.map((item) => item.applicationDocumentPreviewList);
   const applicationStatus = docs.map((item) => item.applicationStatusByTrack);
 
+  const sortedPreviewLists = previewLists.map((documents) =>
+    documents.sort((a, b) => a.joinerId - b.joinerId)
+  );
+
   const handleAddToDocs = async (checkedItems) => {
     try {
       await apiModule.addToDocs(checkedItems);
@@ -115,7 +119,11 @@ const ApplicationStatusPage = () => {
               )}
             </StateBox>
           </StateContainer>
-          <Board pass={previewLists} type="type1" onAdd={handleAddToDocs} />
+          <Board
+            pass={sortedPreviewLists}
+            type="type1"
+            onAdd={handleAddToDocs}
+          />
         </S.Container>
       </S.Layout>
     </>
