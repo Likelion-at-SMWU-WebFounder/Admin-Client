@@ -111,6 +111,7 @@ const LoginPage = () => {
         path: "/",
         secure: true,
       });
+
       navigate("/");
     } catch (err) {
       console.error(err);
