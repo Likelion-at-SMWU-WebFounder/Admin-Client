@@ -109,7 +109,7 @@ const LoginPage = () => {
       setCookie("refreshToken", response.data.result.refreshToken, {
         path: "/",
       });
-      console.log(getCookie("accessToken"));
+
       navigate("/");
     } catch (err) {
       console.error(err);
