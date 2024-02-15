@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 const StyledInput = styled.input`
@@ -98,11 +98,16 @@ const Content = styled.div`
 const ImageWrap = styled.div``;
 
 const Posts = ({ list, checkedItems, setCheckedItems }) => {
+  const [isAllChecked, setIsAllChecked] = useState(false);
+
+  useEffect(() => {
+    setIsAllChecked(list.length > 0 && checkedItems.length === list.length);
+  }, [checkedItems, list]);
+
   const onCheckBoxAll = (e) => {
-    if (e.target.checked) {
-      const checkedListArr = [];
-      list.forEach((item) => checkedListArr.push(item.joinerId));
-      setCheckedItems(checkedListArr);
+    if (!isAllChecked) {
+      const allItems = list.map((item) => item.joinerId);
+      setCheckedItems(allItems);
     } else {
       setCheckedItems([]);
     }
@@ -128,7 +133,11 @@ const Posts = ({ list, checkedItems, setCheckedItems }) => {
       <ContentWrap>
         <ContentTitle>
           <TableCell>
-            <StyledInput type="checkbox" onChange={(e) => onCheckBoxAll(e)} />
+            <StyledInput
+              type="checkbox"
+              onChange={onCheckBoxAll}
+              checked={isAllChecked}
+            />
           </TableCell>
           <TableCell>번호</TableCell>
           <TableCell>이름</TableCell>

@@ -97,7 +97,6 @@ const Board = ({ pass, type, onAdd, onDelete }) => {
   const postsData = (posts) => {
     let filteredPosts = [];
     if (posts && posts.length > 0) {
-      // posts가 정의되고 배열인지 확인
       switch (selectTrack.value) {
         case "all":
           filteredPosts = posts[0];
@@ -129,30 +128,6 @@ const Board = ({ pass, type, onAdd, onDelete }) => {
       setSelectTrack("");
     }
   };
-
-  const boardList = [];
-
-  for (let i = 1; i <= 131; i++) {
-    boardList.push({
-      id: i,
-      name: "김멋사",
-      phone: "01012345678",
-      num: "2345678",
-      track: "백엔드",
-      time: "2024-03-25 04:24:43",
-    });
-  }
-
-  for (let i = 131; i <= 150; i++) {
-    boardList.push({
-      id: i,
-      name: "김멋사",
-      phone: "01012345678",
-      num: "2345678",
-      track: "기획 · 디자인",
-      time: "2024-03-25 04:24:43",
-    });
-  }
 
   const tracks = [
     { value: "all", label: "전체트랙" },
