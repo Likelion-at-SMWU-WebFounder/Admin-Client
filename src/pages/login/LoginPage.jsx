@@ -104,12 +104,10 @@ const LoginPage = () => {
 
       setCookie("accessToken", response.data.result.accessToken, {
         path: "/",
-        secure: true,
       });
 
       setCookie("refreshToken", response.data.result.refreshToken, {
         path: "/",
-        secure: true,
       });
 
       navigate("/");
