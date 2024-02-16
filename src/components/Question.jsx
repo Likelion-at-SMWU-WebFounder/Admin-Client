@@ -122,4 +122,5 @@ const Textarea = styled.div`
   height: fit-content;
   resize: vertical;
   background: #111111;
+  line-height: 1.5rem;
 `;
