@@ -108,6 +108,7 @@ const Text = styled.div`
 
 const QuestionContainer = styled.div`
   margin-bottom: 20px;
+  //
 `;
 
 const Textarea = styled.div`
