@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const LogoContainer = styled.div`
@@ -20,9 +21,9 @@ const LogoImg = styled.img`
 const Logo = () => {
   return (
     <LogoContainer>
-      <a href="http://localhost:3000/sooklion-admin/">
+      <Link to="/">
         <img src={`${process.env.PUBLIC_URL}/Logo.svg`} alt="Logo" />
-      </a>
+      </Link>
       <LogoImg src={`${process.env.PUBLIC_URL}/AdminLogo.svg`} alt="Logo" />
     </LogoContainer>
   );

@@ -51,6 +51,12 @@ const Question = ({ documentData }) => {
               {`${index + 1}: `}
               &nbsp;
               {question.content}
+              <QuestionLength>
+                {documentData && documentData.answerList
+                  ? documentData.answerList[index].length
+                  : ""}
+                자
+              </QuestionLength>
             </Text>
             <Textarea>
               {documentData && documentData.answerList
@@ -123,4 +129,9 @@ const Textarea = styled.div`
   resize: vertical;
   background: #111111;
   line-height: 1.5rem;
+`;
+
+const QuestionLength = styled.div`
+  margin-top: 10px;
+  color: #eb9537;
 `;
