@@ -64,4 +64,10 @@ export const ButtonSet = styled.div`
   display: flex;
   flex-direction: row;
   margin-bottom: 80px;
+
+  @media (max-width: 500px) {
+    position: absolute;
+    right: 0;
+    bottom: auto;
+  }
 `;
