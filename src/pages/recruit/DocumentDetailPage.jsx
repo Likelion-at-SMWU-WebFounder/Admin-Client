@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import apiModule from "../../api/apiModule";
-import Form from "../../components/Form";
-import Question from "../../components/Question";
+import Form from "../../components/document/Form";
+import Question from "../../components/document/Question";
 
 const DocumentDetailPage = () => {
   const { joinerId } = useParams();

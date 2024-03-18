@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import * as S from "../style/LayoutStyle";
+import * as S from "../../style/LayoutStyle";
 import Posts from "./Posts";
 import TimePosts from "./TimePosts";
 import Pagination from "./Pagination";

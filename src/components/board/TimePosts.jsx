@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import TimePopup from "./TimePopup";
+import TimePopup from "../interview/TimePopup";
 
 const StyledInput = styled.input`
   position: relative;

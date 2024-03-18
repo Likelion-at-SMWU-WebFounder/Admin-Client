@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import apiModule from "../api/apiModule";
+import apiModule from "../../api/apiModule";
 
 const PopupOverlay = styled.div`
   position: fixed;

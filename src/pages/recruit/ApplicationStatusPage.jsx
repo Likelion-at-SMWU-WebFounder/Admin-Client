@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import apiModule from "../../api/apiModule";
 import styled from "styled-components";
 import * as S from "../../style/LayoutStyle";
-import Navbar from "../../components/Navbar";
-import Logo from "../../components/Logo";
-import Board from "../../components/Board";
+import Navbar from "../../components/common/Navbar";
+import Logo from "../../components/common/Logo";
+import Board from "../../components/board/Board";
 
 const StateContainer = styled.div`
   display: flex;
